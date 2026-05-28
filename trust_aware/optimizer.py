@@ -5,6 +5,7 @@ from typing import Iterable, List, Mapping, Tuple
 
 from .models import (
     DataSource,
+    ExecutionStrategy,
     QueryPlan,
     QueryRequest,
     PlanStep,
@@ -30,6 +31,22 @@ class TrustAwareQueryOptimizer:
     annotations for downstream policy inspection.
     """
 
+    def __init__(self, strategy: str = "linear") -> None:
+        if strategy not in {"linear", "topsis", "bayesian-ucb"}:
+            raise ValueError(
+                f"unknown strategy {strategy!r}; choose linear, topsis, or bayesian-ucb"
+            )
+        self._strategy_name = strategy
+        self._scorer = self._make_scorer(strategy)
+
+    def _make_scorer(self, strategy: str):
+        from .scoring import LinearWeightedScorer, TOPSISScorer, BayesianUCBScorer
+        return {
+            "linear": LinearWeightedScorer,
+            "topsis": TOPSISScorer,
+            "bayesian-ucb": BayesianUCBScorer,
+        }[strategy]()
+
     def optimize(
         self, sources: Iterable[DataSource], request: QueryRequest
     ) -> QueryPlan:
@@ -47,6 +64,25 @@ class TrustAwareQueryOptimizer:
             candidates.append(
                 _Candidate(source=source, breakdown=breakdown, rationale=rationale)
             )
+
+        # Apply strategy scorer to override weighted_score for ranking
+        if self._strategy_name != "linear" and candidates:
+            candidate_sources = [c.source for c in candidates]
+            new_candidates = []
+            for c in candidates:
+                strat_score, _ = self._scorer.score(
+                    c.source, request, all_sources=candidate_sources
+                )
+                new_bd = ScoreBreakdown(
+                    components=c.breakdown.components,
+                    weights=c.breakdown.weights,
+                    weighted_score=strat_score,
+                    constraints=c.breakdown.constraints,
+                )
+                new_candidates.append(
+                    _Candidate(source=c.source, breakdown=new_bd, rationale=c.rationale)
+                )
+            candidates = new_candidates
 
         candidates.sort(
             key=lambda candidate: (
@@ -76,10 +112,30 @@ class TrustAwareQueryOptimizer:
             (candidate.source, candidate.breakdown.weighted_score)
             for candidate in candidates
         ]
+
+        # Compute QueryPlan metadata
+        confidence = steps[0].breakdown.components.get("confidence", 0.0) if steps else 0.0
+        pareto_front = tuple(c.source for c in candidates if c.source.name in pareto_names)
+
+        if len(steps) < 2:
+            exec_strategy = ExecutionStrategy.SINGLE
+        elif abs(steps[0].score - steps[1].score) < 0.01:
+            exec_strategy = ExecutionStrategy.ENSEMBLE
+        else:
+            exec_strategy = ExecutionStrategy.FALLBACK
+
+        fallback_chain = tuple(c.source for c in candidates[1:])
+        breakdowns = tuple(step.breakdown for step in steps)
+
         return QueryPlan(
             ranked_sources=ranked_sources,
             steps=steps,
             rejected_sources=tuple(rejected),
+            confidence=confidence,
+            pareto_front=pareto_front,
+            execution_strategy=exec_strategy,
+            fallback_chain=fallback_chain,
+            breakdowns=breakdowns,
         )
 
     def _reject_reasons(
@@ -139,6 +195,14 @@ class TrustAwareQueryOptimizer:
                 "hallucination risk "
                 f"{source.hallucination_risk:.3f} > "
                 f"{request.max_hallucination_risk:.3f}"
+            )
+
+        if (
+            request.min_reliability > 0.0
+            and source.reliability < request.min_reliability
+        ):
+            reasons.append(
+                f"reliability {source.reliability:.3f} < {request.min_reliability:.3f}"
             )
 
         return tuple(reasons)

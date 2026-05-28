@@ -20,7 +20,7 @@ import math
 from abc import ABC, abstractmethod
 from typing import List, Optional, Tuple
 
-from .models import DataSource, QueryRequest, ScoreBreakdown, _clamp_0_1
+from .models import DataSource, QueryRequest, ScoreBreakdown, clamp_0_1
 
 
 # ---------------------------------------------------------------------------
@@ -31,7 +31,7 @@ def _latency_component(source: DataSource, request: QueryRequest) -> float:
     """Normalize latency to [0, 1] where 1 means minimum latency."""
     if request.max_latency_ms is None or request.max_latency_ms <= 0:
         return 1.0
-    return _clamp_0_1(1.0 - source.latency_ms / request.max_latency_ms)
+    return clamp_0_1(1.0 - source.latency_ms / request.max_latency_ms)
 
 
 def _cost_component(source: DataSource) -> float:
@@ -46,7 +46,7 @@ def _trust_component(source: DataSource, request: QueryRequest) -> float:
         if request.use_conservative_trust
         else source.effective_trust()
     )
-    return _clamp_0_1(raw)
+    return clamp_0_1(raw)
 
 
 def _raw_features(
@@ -56,7 +56,7 @@ def _raw_features(
     return (
         _trust_component(source, request),
         _latency_component(source, request),
-        _clamp_0_1(source.freshness_score),
+        clamp_0_1(source.freshness_score),
         _cost_component(source),
     )
 
@@ -120,7 +120,17 @@ class LinearWeightedScorer(ScoringStrategy):
             + request.freshness_weight * freshness
             + request.cost_weight * cost
         )
-        return composite, ScoreBreakdown(trust, latency, freshness, cost, composite)
+        breakdown = ScoreBreakdown(
+            components={"trust": trust, "latency": latency, "freshness": freshness, "cost": cost},
+            weights={
+                "trust": request.trust_weight,
+                "latency": request.latency_weight,
+                "freshness": request.freshness_weight,
+                "cost": request.cost_weight,
+            },
+            weighted_score=composite,
+        )
+        return composite, breakdown
 
 
 # ---------------------------------------------------------------------------
@@ -201,7 +211,17 @@ class TOPSISScorer(ScoringStrategy):
         composite = d_neg / (d_pos + d_neg) if (d_pos + d_neg) > 0 else 0.5
 
         raw = matrix[idx]
-        return composite, ScoreBreakdown(raw[0], raw[1], raw[2], raw[3], composite)
+        breakdown = ScoreBreakdown(
+            components={"trust": raw[0], "latency": raw[1], "freshness": raw[2], "cost": raw[3]},
+            weights={
+                "trust": request.trust_weight,
+                "latency": request.latency_weight,
+                "freshness": request.freshness_weight,
+                "cost": request.cost_weight,
+            },
+            weighted_score=composite,
+        )
+        return composite, breakdown
 
 
 # ---------------------------------------------------------------------------
@@ -236,16 +256,16 @@ class BayesianUCBScorer(ScoringStrategy):
         n = source.evidence.n
         # UCB-augmented trust with Bayesian shrinkage
         weight = min(1.0, n / max(1, n + 10))
-        trust_ucb = _clamp_0_1(source.evidence.ucb)
-        trust = _clamp_0_1(
+        trust_ucb = clamp_0_1(source.evidence.ucb)
+        trust = clamp_0_1(
             (1.0 - weight) * source.trust_score + weight * trust_ucb
         )
         # Exploration bonus inversely proportional to evidence count
         bonus = self.exploration_bonus * math.exp(-n / 20.0)
-        trust = _clamp_0_1(trust + bonus)
+        trust = clamp_0_1(trust + bonus)
 
         latency = _latency_component(source, request)
-        freshness = _clamp_0_1(source.freshness_score)
+        freshness = clamp_0_1(source.freshness_score)
         cost = _cost_component(source)
 
         composite = (
@@ -254,4 +274,14 @@ class BayesianUCBScorer(ScoringStrategy):
             + request.freshness_weight * freshness
             + request.cost_weight * cost
         )
-        return composite, ScoreBreakdown(trust, latency, freshness, cost, composite)
+        breakdown = ScoreBreakdown(
+            components={"trust": trust, "latency": latency, "freshness": freshness, "cost": cost},
+            weights={
+                "trust": request.trust_weight,
+                "latency": request.latency_weight,
+                "freshness": request.freshness_weight,
+                "cost": request.cost_weight,
+            },
+            weighted_score=composite,
+        )
+        return composite, breakdown
