@@ -16,4 +16,4 @@ python -m unittest discover -s tests -v
 
 ## Core idea
 
-The optimizer combines trust, latency, freshness, and cost into a weighted score while enforcing hard constraints (for example, vector support, freshness minimum, and latency ceiling). This gives a practical baseline for experimenting with trust-aware query planning policies.
+The optimizer combines trust, latency, freshness, and cost into a weighted score while enforcing hard constraints (for example, vector support, freshness minimum, and latency ceiling). Cost is normalized as `1 / (1 + cost_per_query)` so lower-cost sources contribute higher score while keeping the component bounded. This gives a practical baseline for experimenting with trust-aware query planning policies.
