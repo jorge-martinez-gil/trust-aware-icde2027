@@ -67,24 +67,53 @@ def z_value_for_risk_tolerance(risk_tolerance: float) -> float:
     return 0.0
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, init=False)
 class TrustEvidence:
     """A calibrated evidence item for one trust dimension.
 
     The posterior is a beta-binomial estimate. It is intentionally small and
     dependency-free so experiments can run anywhere a paper artifact is checked
     out.
+
+    Supports both positional API (dimension, positive, total, ...) and the
+    keyword-only shorthand ``successes=`` / ``failures=``.
     """
 
     dimension: str
     positive: float
     total: float
-    weight: float = 1.0
-    prior_positive: float = 2.0
-    prior_negative: float = 2.0
-    notes: str = ""
+    weight: float
+    prior_positive: float
+    prior_negative: float
+    notes: str
 
-    def __post_init__(self) -> None:
+    def __init__(
+        self,
+        dimension: str = "",
+        positive: float = 0.0,
+        total: float = 0.0,
+        weight: float = 1.0,
+        prior_positive: float = 2.0,
+        prior_negative: float = 2.0,
+        notes: str = "",
+        *,
+        successes: float | None = None,
+        failures: float | None = None,
+    ) -> None:
+        if successes is not None:
+            positive = float(successes)
+            if failures is not None:
+                total = float(successes) + float(failures)
+            else:
+                total = float(successes)
+        object.__setattr__(self, "dimension", dimension)
+        object.__setattr__(self, "positive", float(positive))
+        object.__setattr__(self, "total", float(total))
+        object.__setattr__(self, "weight", float(weight))
+        object.__setattr__(self, "prior_positive", float(prior_positive))
+        object.__setattr__(self, "prior_negative", float(prior_negative))
+        object.__setattr__(self, "notes", notes)
+        # validation (was in __post_init__)
         if self.total < 0:
             raise ValueError("total evidence count must be non-negative")
         if self.positive < 0:
@@ -108,8 +137,8 @@ class TrustEvidence:
 
     @property
     def posterior_beta(self) -> float:
-        failures = self.total - self.positive
-        return self.prior_negative + failures
+        _failures = self.total - self.positive
+        return self.prior_negative + _failures
 
     @property
     def posterior_mean(self) -> float:
@@ -137,6 +166,69 @@ class TrustEvidence:
             self.posterior_mean - max(0.0, z_value) * math.sqrt(self.posterior_variance)
         )
 
+    # ------------------------------------------------------------------
+    # Convenience accessors
+    # ------------------------------------------------------------------
+
+    @property
+    def successes(self) -> float:
+        return self.positive
+
+    @property
+    def failures(self) -> float:
+        return self.total - self.positive
+
+    @property
+    def n(self) -> float:
+        return self.total
+
+    @property
+    def mean(self) -> float:
+        return self.posterior_mean
+
+    @property
+    def std(self) -> float:
+        return math.sqrt(max(0.0, self.posterior_variance))
+
+    @property
+    def lcb(self) -> float:
+        return self.lower_bound(1.96)
+
+    @property
+    def ucb(self) -> float:
+        return clamp_0_1(
+            self.posterior_mean + 1.96 * math.sqrt(max(0.0, self.posterior_variance))
+        )
+
+    # ------------------------------------------------------------------
+    # Mutation helpers (return new frozen instances)
+    # ------------------------------------------------------------------
+
+    def update(self, success: bool) -> "TrustEvidence":
+        """Return a new instance with one additional observation."""
+        return TrustEvidence(
+            dimension=self.dimension,
+            positive=self.positive + (1.0 if success else 0.0),
+            total=self.total + 1.0,
+            weight=self.weight,
+            prior_positive=self.prior_positive,
+            prior_negative=self.prior_negative,
+            notes=self.notes,
+        )
+
+    def decay(self, factor: float) -> "TrustEvidence":
+        """Return a new instance with observation counts scaled by *factor*."""
+        factor = clamp_0_1(factor)
+        return TrustEvidence(
+            dimension=self.dimension,
+            positive=self.positive * factor,
+            total=self.total * factor,
+            weight=self.weight,
+            prior_positive=self.prior_positive,
+            prior_negative=self.prior_negative,
+            notes=self.notes,
+        )
+
 
 @dataclass(frozen=True)
 class DataSource:
@@ -160,6 +252,8 @@ class DataSource:
     hallucination_risk: float = 0.0
     schema_reliability: float = 1.0
     metadata: Mapping[str, str] = field(default_factory=dict)
+    reliability: float = 1.0
+    evidence: TrustEvidence = field(default_factory=TrustEvidence)
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "trust_score", clamp_0_1(self.trust_score))
@@ -183,6 +277,9 @@ class DataSource:
         object.__setattr__(self, "capabilities", frozenset(capabilities))
         object.__setattr__(self, "trust_evidence", tuple(self.trust_evidence))
         object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
+        object.__setattr__(self, "reliability", clamp_0_1(self.reliability))
+        if not isinstance(self.evidence, TrustEvidence):
+            object.__setattr__(self, "evidence", TrustEvidence())
 
     def supports_all(self, required_capabilities: Iterable[str | Capability]) -> bool:
         required = normalize_capabilities(required_capabilities)
@@ -230,6 +327,24 @@ class DataSource:
             return 0.0
         return clamp_0_1(weighted_sum / total_weight)
 
+    def with_evidence(self, evidence: TrustEvidence) -> "DataSource":
+        from dataclasses import replace
+        return replace(self, evidence=evidence)
+
+    def effective_trust(self) -> float:
+        n = self.evidence.n
+        if n <= 0:
+            return self.trust_score
+        weight = min(1.0, n / (n + 20.0))
+        return clamp_0_1((1.0 - weight) * self.trust_score + weight * self.evidence.mean)
+
+    def effective_trust_lcb(self) -> float:
+        n = self.evidence.n
+        if n <= 0:
+            return self.trust_score
+        weight = min(1.0, n / (n + 20.0))
+        return clamp_0_1((1.0 - weight) * self.trust_score + weight * self.evidence.lcb)
+
 
 @dataclass(frozen=True)
 class QueryRequest:
@@ -255,6 +370,8 @@ class QueryRequest:
     uncertainty_weight: float = 0.0
     risk_tolerance: float = 0.15
     top_k: int | None = None
+    use_conservative_trust: bool = False
+    min_reliability: float = 0.0
 
     def __post_init__(self) -> None:
         capabilities = set(normalize_capabilities(self.required_capabilities))
@@ -266,6 +383,7 @@ class QueryRequest:
         )
         object.__setattr__(self, "min_trust_score", clamp_0_1(self.min_trust_score))
         object.__setattr__(self, "risk_tolerance", clamp_0_1(self.risk_tolerance))
+        object.__setattr__(self, "min_reliability", clamp_0_1(self.min_reliability))
         if self.max_latency_ms is not None:
             object.__setattr__(
                 self, "max_latency_ms", max(0.0, float(self.max_latency_ms))
@@ -298,6 +416,22 @@ class ScoreBreakdown:
     def contribution(self, name: str) -> float:
         return self.components.get(name, 0.0) * self.weights.get(name, 0.0)
 
+    @property
+    def trust(self) -> float:
+        return self.components.get("trust", 0.0)
+
+    @property
+    def latency(self) -> float:
+        return self.components.get("latency", 0.0)
+
+    @property
+    def freshness(self) -> float:
+        return self.components.get("freshness", 0.0)
+
+    @property
+    def cost(self) -> float:
+        return self.components.get("cost", 0.0)
+
 
 @dataclass(frozen=True)
 class PlanStep:
@@ -314,12 +448,23 @@ class RejectedSource:
     reasons: Tuple[str, ...]
 
 
+class ExecutionStrategy(str, Enum):
+    SINGLE = "single"
+    ENSEMBLE = "ensemble"
+    FALLBACK = "fallback"
+
+
 @dataclass(frozen=True)
 class QueryPlan:
     ranked_sources: List[Tuple[DataSource, float]]
     steps: Tuple[PlanStep, ...] = ()
     rejected_sources: Tuple[RejectedSource, ...] = ()
     objective: str = "trust_aware_expected_utility"
+    confidence: float = 0.0
+    pareto_front: Tuple[DataSource, ...] = ()
+    execution_strategy: ExecutionStrategy = ExecutionStrategy.SINGLE
+    fallback_chain: Tuple[DataSource, ...] = ()
+    breakdowns: Tuple[ScoreBreakdown, ...] = ()
 
     @property
     def primary_source(self) -> DataSource | None:
@@ -357,3 +502,36 @@ class QueryPlan:
         if self.rejected_sources:
             lines.append(f"Rejected {len(self.rejected_sources)} source(s).")
         return "\n".join(lines)
+
+
+def _source_dominates(a: DataSource, b: DataSource) -> bool:
+    at_least_as_good = (
+        a.trust_score >= b.trust_score
+        and a.latency_ms <= b.latency_ms
+        and a.cost_per_query <= b.cost_per_query
+        and a.freshness_score >= b.freshness_score
+    )
+    strictly_better = (
+        a.trust_score > b.trust_score
+        or a.latency_ms < b.latency_ms
+        or a.cost_per_query < b.cost_per_query
+        or a.freshness_score > b.freshness_score
+    )
+    return at_least_as_good and strictly_better
+
+
+def compute_pareto_front(sources: Iterable[DataSource]) -> List[DataSource]:
+    """Return sources not dominated by any other on key quality axes."""
+    sources_list = list(sources)
+    result = []
+    for candidate in sources_list:
+        dominated = False
+        for other in sources_list:
+            if other is candidate:
+                continue
+            if _source_dominates(other, candidate):
+                dominated = True
+                break
+        if not dominated:
+            result.append(candidate)
+    return result

@@ -15,7 +15,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
-from .models import DataSource, _clamp_0_1
+from .models import DataSource, clamp_0_1
 
 
 @dataclass
@@ -74,7 +74,7 @@ class TrustGraph:
     ) -> None:
         """Add a directed endorsement edge with the given weight ∈ [0, 1]."""
         self._edges.append(
-            TrustEdge(source_name, target_name, _clamp_0_1(weight))
+            TrustEdge(source_name, target_name, clamp_0_1(weight))
         )
 
     def propagated_trust(
@@ -136,7 +136,7 @@ class TrustGraph:
                 break
 
         max_r = max(rank) or 1.0
-        return {names[i]: _clamp_0_1(rank[i] / max_r) for i in range(n)}
+        return {names[i]: clamp_0_1(rank[i] / max_r) for i in range(n)}
 
     def augmented_sources(self, blend: float = 0.5) -> List[DataSource]:
         """Return sources with trust scores blended with propagated values.
@@ -151,20 +151,9 @@ class TrustGraph:
         result = []
         for name, source in self._nodes.items():
             prop = propagated.get(name, source.trust_score)
-            blended = _clamp_0_1(
+            blended = clamp_0_1(
                 (1.0 - blend) * source.trust_score + blend * prop
             )
-            result.append(
-                DataSource(
-                    name=source.name,
-                    trust_score=blended,
-                    latency_ms=source.latency_ms,
-                    cost_per_query=source.cost_per_query,
-                    freshness_score=source.freshness_score,
-                    supports_vector=source.supports_vector,
-                    reliability=source.reliability,
-                    evidence=source.evidence,
-                    tags=source.tags,
-                )
-            )
+            import dataclasses
+            result.append(dataclasses.replace(source, trust_score=blended))
         return result
