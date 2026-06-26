@@ -249,3 +249,30 @@ artifact documentation:
 - Publication-quality SVG figures generated from the artifact itself.
 - Focused tests that validate optimizer behavior.
 - No external runtime dependencies.
+
+## Federated Trust-Aware Retrieval Study (Real Data)
+
+The `trust_aware.federated` subpackage contains the paper's empirical core: a
+real-data study that frames trust-aware source selection as resource selection /
+query routing over a federation of five heterogeneous, public-domain IR
+collections (CACM, MED, NPL, CRANFIELD, CISI — 18,526 documents, 476 judged
+queries; provenance in `data/federated/raw/PROVENANCE.md`).
+
+It compares the trust-aware router against established federated-IR baselines
+(CORI, ReDDE, Random, Search-All, Oracle) with query-clustered paired Wilcoxon
+tests, family-wise Holm-Bonferroni correction, query bootstrap CIs, paired
+rank-biserial effect sizes, and three seeded replicates. The headline finding:
+when untrusted duplicate ("evil-twin")
+sources are injected, content-based selection collapses while trust-aware routing
+stays robust. See `docs/federated_study.md` for the full design, results, and
+honest limitations.
+
+```bash
+pip install -e .[federated]
+python -m trust_aware --federated-study     # full study + figures + LaTeX tables
+python -m unittest tests.test_federated -v  # validation incl. the headline claim
+```
+
+Outputs: `results/federated/` (JSON + `statistical_analysis.json` +
+`RESULTS.md` + `tables/*.tex`) and
+`figures/federated/` (publication PDF + PNG).

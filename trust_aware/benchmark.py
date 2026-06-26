@@ -276,7 +276,47 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run the real-data WDBC study; optionally pass a path to wdbc.data"
         ),
     )
+    parser.add_argument(
+        "--federated-study",
+        action="store_true",
+        help=(
+            "run the federated trust-aware retrieval study (sweep + multi-seed "
+            "+ adversary variants) over the real IR collections, then emit "
+            "figures and LaTeX tables"
+        ),
+    )
+    parser.add_argument(
+        "--federated-report",
+        action="store_true",
+        help="regenerate federated figures + tables from cached results JSON",
+    )
     args = parser.parse_args(argv)
+
+    if args.federated_study:
+        from .federated.experiment import run_study, run_multiseed, run_variant_study
+        from .federated import plots as fed_plots
+        from .federated import report as fed_report
+
+        print("Running federated robustness sweeps (seeds 7, 11, 13)...")
+        for sweep_seed in (7, 11, 13):
+            run_study(seed=sweep_seed)
+        print("Running multi-seed headline conditions...")
+        run_multiseed()
+        print("Running adversary variant sensitivity...")
+        run_variant_study()
+        fed_report.generate_all()
+        fed_plots.generate_all()
+        print("Federated study complete. "
+              "See results/federated/ and figures/federated/.")
+        return 0
+
+    if args.federated_report:
+        from .federated import plots as fed_plots
+        from .federated import report as fed_report
+
+        fed_report.generate_all()
+        fed_plots.generate_all()
+        return 0
 
     if args.plots is not None:
         from .visualization import generate_all_figures

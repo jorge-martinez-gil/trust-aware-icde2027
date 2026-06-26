@@ -100,3 +100,28 @@ Supported by:
 The generated SVG figures expose policy tradeoffs, Pareto frontiers, score
 contributions, composed AI query pipelines, calibration uncertainty, and
 real-data statistical intervals.
+
+## Claim 9: Trust Is Essential for Provenance-Robust Source Routing (Headline)
+
+Supported by:
+
+- `trust_aware.federated` (real 5-collection IR testbed, BM25, CORI/ReDDE
+  baselines, trust-aware router, statistics, figures, report)
+- `python -m trust_aware --federated-study`
+- `tests/test_federated.py::TestHeadlineClaim`
+- `docs/federated_study.md`, `results/federated/RESULTS.md`,
+  `figures/federated/`
+
+On a federation of five real, heterogeneous IR collections (CACM, MED, NPL,
+CRAN, CISI; 18,526 docs, 476 judged queries), content-based resource selection
+(CORI, ReDDE) is *blind to provenance*: when untrusted exact-duplicate
+("evil-twin") sources are injected, their routing accuracy collapses (CORI R@1
+0.874 -> 0.424 at 6 twins). The trust-aware router, which learns per-source
+calibrated beta-binomial trust online from observed outcomes, stays robust
+(R@1 0.832 -> 0.777) and improves nDCG@10 over CORI by +0.141 and over ReDDE by
++0.178 at 6 twins. Query-clustered paired Wilcoxon tests over 476 independent
+queries, with Holm correction across the four confirmatory comparisons, give
+p_Holm <= 1.5e-31 and large paired rank-biserial effects (0.726 and 0.793).
+Results average the within-query observations across seeds {7, 11, 13}. On the
+clean federation it is competitive but
+not better than CORI — the cost of the mechanism is reported transparently.

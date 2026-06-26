@@ -1,2 +1,15 @@
 __pycache__/
 *.py[cod]
+*.egg-info/
+.pytest_cache/
+.matplotlib/
+
+# Local LaTeX build residue; keep source, vendored style files, and PDFs.
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.tmp

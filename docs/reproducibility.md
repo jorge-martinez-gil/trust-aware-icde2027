@@ -1,11 +1,14 @@
 # Reproducibility Guide
 
-This artifact is designed to run without external dependencies.
+The core optimizer artifact is designed to run without external dependencies.
+The federated retrieval study uses the optional `federated` extras for vectorized
+BM25, statistical tests, and publication figures.
 
 ## Environment
 
 - Python 3.10 or newer.
-- No required third-party packages.
+- No required third-party packages for the core optimizer.
+- Federated study extras: `pip install -e .[federated]`.
 - Deterministic pseudo-random seeds for all synthetic experiments.
 
 ## Commands
@@ -44,6 +47,20 @@ Run the end-to-end demo:
 
 ```bash
 python examples/research_demo.py
+```
+
+Run the federated retrieval study, including the contamination sweep,
+multi-seed headline conditions, online reputation baselines, adversary-variant
+sensitivity, LaTeX tables, and publication figures:
+
+```bash
+python -m trust_aware --federated-study
+```
+
+Regenerate the federated report from cached JSON:
+
+```bash
+python -m trust_aware --federated-report
 ```
 
 ## Expected Study Shape
@@ -110,3 +127,13 @@ The figures are vector graphics generated directly from optimizer, policy,
 certificate, pipeline, calibration, and real-data statistical objects. They
 should remain crisp in a PDF paper and can be regenerated after changing
 optimizer logic.
+
+The federated figure generator writes both PDF and PNG copies for every plot to:
+
+- `figures/federated/`
+- `paper/figures/`
+
+The federated report generator writes LaTeX table copies to:
+
+- `results/federated/tables/`
+- `paper/tables/`
