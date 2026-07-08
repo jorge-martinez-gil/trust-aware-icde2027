@@ -30,6 +30,26 @@ a first-class objective, not as an application-level afterthought.
 - Unit tests covering legacy behavior, calibration, explainability, catalogs,
   certificates, portfolios, pipelines, feedback, and benchmark determinism.
 
+## Installation
+
+The core optimizer has no third-party runtime dependencies. Clone the repository
+and install it in editable mode:
+
+```bash
+git clone https://github.com/jorge-martinez-gil/trust-aware.git
+cd trust-aware
+pip install -e .
+```
+
+The federated retrieval study additionally needs numpy, scipy, and matplotlib.
+Install them with the `federated` extra:
+
+```bash
+pip install -e .[federated]
+```
+
+Python 3.10 or newer is required.
+
 ## Quick Start
 
 Run the test suite:
@@ -276,3 +296,26 @@ python -m unittest tests.test_federated -v  # validation incl. the headline clai
 Outputs: `results/federated/` (JSON + `statistical_analysis.json` +
 `RESULTS.md` + `tables/*.tex`) and
 `figures/federated/` (publication PDF + PNG).
+
+## Citation
+
+If you use this software or its results, please cite the accompanying paper.
+Machine-readable metadata is provided in [`CITATION.cff`](CITATION.cff).
+
+```bibtex
+@inproceedings{martinezgil2026trustaware,
+  title     = {Trust-Aware Query Optimization for AI-Native Data Systems},
+  author    = {Martinez-Gil, Jorge},
+  year      = {2026},
+  note      = {Update with the final venue, pages, and DOI upon publication}
+}
+```
+
+## License
+
+Released under the [MIT License](LICENSE), Copyright (c) 2026 Jorge Martinez-Gil.
+
+The bundled datasets are redistributed under their own terms; see
+[`data/README.md`](data/README.md) and
+[`data/federated/raw/PROVENANCE.md`](data/federated/raw/PROVENANCE.md) for
+provenance and licensing of the WDBC and federated IR collections.

@@ -9,7 +9,7 @@ description = "Reference implementation for trust-aware query optimization in AI
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Trust-Aware Query Optimization Authors" }]
+authors = [{ name = "Jorge Martinez-Gil", email = "jorge.martinez-gil@scch.at" }]
 keywords = [
     "query-optimization",
     "trust",
@@ -40,7 +40,9 @@ federated = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/"
+Homepage = "https://github.com/jorge-martinez-gil/trust-aware"
+Repository = "https://github.com/jorge-martinez-gil/trust-aware"
+Issues = "https://github.com/jorge-martinez-gil/trust-aware/issues"
 
 [project.scripts]
 trust-aware-benchmark = "trust_aware.benchmark:main"

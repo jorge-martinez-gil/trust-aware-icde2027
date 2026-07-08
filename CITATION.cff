@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+title: >-
+  Trust-Aware Query Optimization for AI-Native Data
+  Systems (reference implementation)
+message: >-
+  If you use this software or its results, please cite
+  both the software and the accompanying paper.
+type: software
+authors:
+  - given-names: Jorge
+    family-names: Martinez-Gil
+    email: jorge.martinez-gil@scch.at
+    affiliation: Software Competence Center Hagenberg GmbH (SCCH), Austria
+repository-code: "https://github.com/jorge-martinez-gil/trust-aware"
+url: "https://github.com/jorge-martinez-gil/trust-aware"
+abstract: >-
+  A dependency-light reference implementation of trust-aware query
+  optimization for AI-native data systems, including constraint-aware
+  source selection, calibrated beta-binomial trust scoring, explainable
+  query plans, trust certificates, redundant source portfolios,
+  multi-stage pipeline planning, and a real-data federated retrieval
+  study over five public-domain IR collections.
+keywords:
+  - query-optimization
+  - trust
+  - ai-native-data-systems
+  - provenance
+  - retrieval-augmented-generation
+  - federated-information-retrieval
+license: MIT
+version: 0.1.0
+date-released: "2026-07-01"
+preferred-citation:
+  type: conference-paper
+  title: "Trust-Aware Query Optimization for AI-Native Data Systems"
+  authors:
+    - given-names: Jorge
+      family-names: Martinez-Gil
+      email: jorge.martinez-gil@scch.at
+      affiliation: Software Competence Center Hagenberg GmbH (SCCH), Austria
+  year: 2026
+  # TODO: complete the following fields once the paper is published.
+  # collection-title: "<Proceedings / venue name>"
+  # doi: "<10.xxxx/xxxxx>"
+  # start: <first page>
+  # end: <last page>
+  # publisher:
+  #   name: "Springer"
