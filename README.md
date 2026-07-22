@@ -274,9 +274,10 @@ artifact documentation:
 
 The `trust_aware.federated` subpackage contains the paper's empirical core: a
 real-data study that frames trust-aware source selection as resource selection /
-query routing over a federation of five heterogeneous, public-domain IR
-collections (CACM, MED, NPL, CRANFIELD, CISI — 18,526 documents, 476 judged
-queries; provenance in `data/federated/raw/PROVENANCE.md`).
+query routing over a federation of six heterogeneous, openly licensed IR
+collections (CACM, MED, NPL, CRANFIELD, CISI, and the modern BEIR SciFact —
+23,709 documents, 776 judged queries; provenance in
+`data/federated/raw/PROVENANCE.md`).
 
 It compares the trust-aware router against established federated-IR baselines
 (CORI, ReDDE, Random, Search-All, Oracle) with query-clustered paired Wilcoxon

@@ -1,7 +1,7 @@
 """Extended federated trust experiments (journal revision).
 
 Generalises the stylised evil-twin threat model along three axes that a
-top-tier evaluation demands, reusing the real five-collection testbed, the CORI
+top-tier evaluation demands, reusing the real six-collection testbed, the CORI
 content signal, and the prequential protocol of the core study:
 
 * EXT-1  Graded / stochastic reliability -> calibration recovery.

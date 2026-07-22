@@ -105,23 +105,23 @@ real-data statistical intervals.
 
 Supported by:
 
-- `trust_aware.federated` (real 5-collection IR testbed, BM25, CORI/ReDDE
+- `trust_aware.federated` (real 6-collection IR testbed, BM25, CORI/ReDDE
   baselines, trust-aware router, statistics, figures, report)
 - `python -m trust_aware --federated-study`
 - `tests/test_federated.py::TestHeadlineClaim`
 - `docs/federated_study.md`, `results/federated/RESULTS.md`,
   `figures/federated/`
 
-On a federation of five real, heterogeneous IR collections (CACM, MED, NPL,
-CRAN, CISI; 18,526 docs, 476 judged queries), content-based resource selection
-(CORI, ReDDE) is *blind to provenance*: when untrusted exact-duplicate
+On a federation of six real, heterogeneous IR collections (CACM, MED, NPL,
+CRAN, CISI, SCIFACT; 23,709 docs, 776 judged queries), content-based resource
+selection (CORI, ReDDE) is *blind to provenance*: when untrusted exact-duplicate
 ("evil-twin") sources are injected, their routing accuracy collapses (CORI R@1
-0.874 -> 0.424 at 6 twins). The trust-aware router, which learns per-source
+0.893 -> 0.451 at 6 twins). The trust-aware router, which learns per-source
 calibrated beta-binomial trust online from observed outcomes, stays robust
-(R@1 0.832 -> 0.777) and improves nDCG@10 over CORI by +0.141 and over ReDDE by
-+0.178 at 6 twins. Query-clustered paired Wilcoxon tests over 476 independent
+(R@1 0.822 -> 0.807) and improves nDCG@10 over CORI by +0.193 and over ReDDE by
++0.217 at 6 twins. Query-clustered paired Wilcoxon tests over 776 independent
 queries, with Holm correction across the four confirmatory comparisons, give
-p_Holm <= 1.5e-31 and large paired rank-biserial effects (0.726 and 0.793).
+p_Holm <= 4.9e-59 and large paired rank-biserial effects (0.809 and 0.841).
 Results average the within-query observations across seeds {7, 11, 13}. On the
 clean federation it is competitive but
 not better than CORI — the cost of the mechanism is reported transparently.

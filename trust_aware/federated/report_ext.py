@@ -7,6 +7,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+# Importing plots applies the shared publication rcParams (serif fonts, sizes)
+# so every figure in the paper has one consistent visual style.
+from .plots import STYLE, _polish, _legend_above, _save
+
 HERE = os.path.dirname(__file__)
 RES = os.path.join(HERE, "..", "..", "results", "federated")
 PT = os.path.join(HERE, "..", "..", "paper", "tables")
@@ -66,7 +70,7 @@ def regenerate_ext_tables_and_figures():
                   f"{r['learned_mean']:.3f}\\,$\\pm$\\,{r['learned_mean_std']:.3f} & {r['learned_lower']:.3f} & {r['n_obs']:.0f} \\\\")
     ct.append(r"\midrule")
     gen = [r for r in agg.values() if r["kind"] == "genuine"]
-    ct.append(f"genuine (mean of 5) & {np.mean([r['true_reliability'] for r in gen]):.3f} & -- & "
+    ct.append(f"genuine (mean of {len(gen)}) & {np.mean([r['true_reliability'] for r in gen]):.3f} & -- & "
               f"{np.mean([r['learned_mean'] for r in gen]):.3f} & -- & -- \\\\")
     ct += [r"\bottomrule", r"\end{tabular}"]
     open(os.path.join(PT, "table_calibration.tex"), "w").write("\n".join(ct) + "\n")
@@ -91,29 +95,45 @@ def regenerate_ext_tables_and_figures():
     xs = [r["true_reliability"] for r in mirrors]; ys = [r["learned_mean"] for r in mirrors]
     lcb = [r["learned_lower"] for r in mirrors]; es = [r["learned_mean_std"] for r in mirrors]
     gx = [r["true_reliability"] for r in gen]; gy = [r["learned_mean"] for r in gen]
-    fig, ax = plt.subplots(figsize=(4.3, 3.4))
-    ax.plot([0, 1], [0, 1], "--", color="gray", lw=1, label="perfect calibration")
-    ax.errorbar(xs, ys, yerr=es, fmt="o", color="#1f5fa8", ms=7, capsize=3, label="mirror: learned $\\hat\\mu$")
-    ax.scatter(xs, lcb, marker="v", color="#1f5fa8", alpha=0.55, label="mirror: routing LCB $\\tau$")
-    ax.scatter(gx, gy, marker="s", color="#159957", s=55, label="genuine source")
+    c_mirror = STYLE["Trust-Aware"]["color"]; c_gen = STYLE["CORI+Mean"]["color"]
+    fig, ax = plt.subplots(figsize=(3.45, 2.9), constrained_layout=True)
+    ax.plot([0, 1], [0, 1], "--", color="#999999", lw=1, label="perfect calibration")
+    ax.errorbar(xs, ys, yerr=es, fmt="o", color=c_mirror, ms=5.5, capsize=3,
+                lw=1.2, label="mirror: learned $\\hat\\mu$")
+    ax.scatter(xs, lcb, marker="v", color=c_mirror, alpha=0.55, s=24,
+               label="mirror: routing LCB $\\tau$")
+    ax.scatter(gx, gy, marker="s", color=c_gen, s=32, label="genuine source")
     ax.set_xlabel("true source reliability $p$"); ax.set_ylabel("learned trust")
-    ax.set_xlim(-0.03, 1.05); ax.set_ylim(-0.03, 1.05); ax.legend(fontsize=7, loc="upper left"); ax.grid(alpha=0.25)
+    ax.set_xlim(-0.03, 1.05); ax.set_ylim(-0.03, 1.05)
+    # Data hugs the diagonal, so the lower-right triangle is guaranteed empty.
+    ax.legend(fontsize=7, loc="lower right", frameon=False)
     c = cal["calibration"]
-    ax.set_title(f"Trust calibration to graded reliability\n(mirror MAE={c['mae_mirror']:.3f}, Pearson $r$={c['pearson_mirror']:.3f})", fontsize=8.5)
-    fig.tight_layout(); fig.savefig(os.path.join(PF, "fig_calibration.pdf")); fig.savefig(os.path.join(PF, "fig_calibration.png"), dpi=150); plt.close(fig)
+    ax.text(0.03, 0.97,
+            f"mirror MAE = {c['mae_mirror']:.3f}\nPearson $r$ = {c['pearson_mirror']:.3f}",
+            transform=ax.transAxes, ha="left", va="top", fontsize=7.5)
+    _polish(ax)
+    _save(fig, "fig_calibration")
 
     # fig_drift
     dr = json.load(open(os.path.join(RES, "ext_drift.json"))); tr = dr["trajectory"]; sw = dr["regime_change_at_target_query"]
-    fig, ax = plt.subplots(figsize=(4.6, 3.2))
-    colors = {"stale->refreshed": "#159957", "fresh->poisoned": "#b03030"}
+    fig, ax = plt.subplots(figsize=(3.45, 2.6), constrained_layout=True)
+    colors = {"stale->refreshed": STYLE["CORI+Mean"]["color"],
+              "fresh->poisoned": STYLE["CORI"]["color"]}
     for tw, lab in dr["drift"].items():
         pts = tr[tw]
-        ax.plot([p["t"] for p in pts], [p["mean"] for p in pts], label=lab, color=colors.get(lab, "k"), lw=1.8)
-    ax.axvline(sw, ls="--", color="gray", lw=1); ax.text(sw + 2, 0.05, "reliability\nregime change", fontsize=7, color="gray")
-    ax.set_xlabel(f"query index over the {dr['target']} stream"); ax.set_ylabel("learned trust (posterior mean)")
-    ax.set_ylim(0, 1); ax.legend(fontsize=8, loc="center right"); ax.grid(alpha=0.25)
-    ax.set_title("Online re-calibration under non-stationary reliability", fontsize=9)
-    fig.tight_layout(); fig.savefig(os.path.join(PF, "fig_drift.pdf")); fig.savefig(os.path.join(PF, "fig_drift.png"), dpi=150); plt.close(fig)
+        ax.plot([p["t"] for p in pts], [p["mean"] for p in pts], label=lab,
+                color=colors.get(lab, "k"), lw=1.8)
+    ax.axvline(sw, ls="--", color="#999999", lw=1)
+    # Rotated label beside the vertical line, in the mid-height band that both
+    # trajectories leave empty around the regime change.
+    ax.text(sw + 5, 0.50, "regime change", rotation=90, ha="left", va="center",
+            fontsize=7, color="#666666")
+    ax.set_xlabel(f"query index over the {dr['target']} stream")
+    ax.set_ylabel("learned trust\n(posterior mean)")
+    ax.set_ylim(0, 1.02)
+    _legend_above(ax, ncol=2, fontsize=7.5)
+    _polish(ax)
+    _save(fig, "fig_drift")
 
 
 def generate_all_ext():

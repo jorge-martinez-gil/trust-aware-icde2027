@@ -35,28 +35,28 @@
         "kind": "mirror",
         "target": "NPL",
         "true_reliability": 0.4,
-        "learned_mean": 0.466,
-        "learned_lower": 0.4171,
+        "learned_mean": 0.4175,
+        "learned_lower": 0.3691,
         "n_obs": 93,
-        "realised": 0.4301
+        "realised": 0.3763
       },
       "TWIN-CRAN-4": {
         "kind": "mirror",
         "target": "CRAN",
         "true_reliability": 0.6,
-        "learned_mean": 0.5787,
-        "learned_lower": 0.5466,
+        "learned_mean": 0.6255,
+        "learned_lower": 0.594,
         "n_obs": 225,
-        "realised": 0.5689
+        "realised": 0.6178
       },
       "TWIN-CISI-5": {
         "kind": "mirror",
         "target": "CISI",
         "true_reliability": 0.8,
-        "learned_mean": 0.8023,
-        "learned_lower": 0.7596,
+        "learned_mean": 0.7907,
+        "learned_lower": 0.7471,
         "n_obs": 76,
-        "realised": 0.8026
+        "realised": 0.7895
       },
       "CACM": {
         "kind": "genuine",
@@ -102,6 +102,15 @@
         "learned_lower": 0.9606,
         "n_obs": 76,
         "realised": 1.0
+      },
+      "SCIFACT": {
+        "kind": "genuine",
+        "target": "SCIFACT",
+        "true_reliability": 0.9,
+        "learned_mean": 0.8968,
+        "learned_lower": 0.8795,
+        "n_obs": 300,
+        "realised": 0.9
       }
     },
     {
@@ -127,111 +136,19 @@
         "kind": "mirror",
         "target": "NPL",
         "true_reliability": 0.4,
-        "learned_mean": 0.4757,
-        "learned_lower": 0.4268,
+        "learned_mean": 0.3883,
+        "learned_lower": 0.3406,
         "n_obs": 93,
-        "realised": 0.4409
+        "realised": 0.3441
       },
       "TWIN-CRAN-4": {
         "kind": "mirror",
         "target": "CRAN",
         "true_reliability": 0.6,
-        "learned_mean": 0.5702,
-        "learned_lower": 0.538,
+        "learned_mean": 0.5787,
+        "learned_lower": 0.5466,
         "n_obs": 225,
-        "realised": 0.56
-      },
-      "TWIN-CISI-5": {
-        "kind": "mirror",
-        "target": "CISI",
-        "true_reliability": 0.8,
-        "learned_mean": 0.8256,
-        "learned_lower": 0.7849,
-        "n_obs": 76,
-        "realised": 0.8289
-      },
-      "CACM": {
-        "kind": "genuine",
-        "target": "CACM",
-        "true_reliability": 0.9808,
-        "learned_mean": 0.9516,
-        "learned_lower": 0.9246,
-        "n_obs": 52,
-        "realised": 0.9808
-      },
-      "MED": {
-        "kind": "genuine",
-        "target": "MED",
-        "true_reliability": 1.0,
-        "learned_mean": 0.95,
-        "learned_lower": 0.916,
-        "n_obs": 30,
-        "realised": 1.0
-      },
-      "NPL": {
-        "kind": "genuine",
-        "target": "NPL",
-        "true_reliability": 0.9677,
-        "learned_mean": 0.9515,
-        "learned_lower": 0.9304,
-        "n_obs": 93,
-        "realised": 0.9677
-      },
-      "CRAN": {
-        "kind": "genuine",
-        "target": "CRAN",
-        "true_reliability": 0.9689,
-        "learned_mean": 0.9617,
-        "learned_lower": 0.9492,
-        "n_obs": 225,
-        "realised": 0.9689
-      },
-      "CISI": {
-        "kind": "genuine",
-        "target": "CISI",
-        "true_reliability": 1.0,
-        "learned_mean": 0.9767,
-        "learned_lower": 0.9606,
-        "n_obs": 76,
-        "realised": 1.0
-      }
-    },
-    {
-      "TWIN-CACM-1": {
-        "kind": "mirror",
-        "target": "CACM",
-        "true_reliability": 0.0,
-        "learned_mean": 0.129,
-        "learned_lower": 0.0868,
-        "n_obs": 52,
-        "realised": 0.0
-      },
-      "TWIN-MED-2": {
-        "kind": "mirror",
-        "target": "MED",
-        "true_reliability": 0.2,
-        "learned_mean": 0.45,
-        "learned_lower": 0.3723,
-        "n_obs": 30,
-        "realised": 0.3333
-      },
-      "TWIN-NPL-3": {
-        "kind": "mirror",
-        "target": "NPL",
-        "true_reliability": 0.4,
-        "learned_mean": 0.4078,
-        "learned_lower": 0.3596,
-        "n_obs": 93,
-        "realised": 0.3656
-      },
-      "TWIN-CRAN-4": {
-        "kind": "mirror",
-        "target": "CRAN",
-        "true_reliability": 0.6,
-        "learned_mean": 0.6426,
-        "learned_lower": 0.6114,
-        "n_obs": 225,
-        "realised": 0.6356
+        "realised": 0.5689
       },
       "TWIN-CISI-5": {
         "kind": "mirror",
@@ -286,6 +203,116 @@
         "learned_lower": 0.9606,
         "n_obs": 76,
         "realised": 1.0
+      },
+      "SCIFACT": {
+        "kind": "genuine",
+        "target": "SCIFACT",
+        "true_reliability": 0.9,
+        "learned_mean": 0.8968,
+        "learned_lower": 0.8795,
+        "n_obs": 300,
+        "realised": 0.9
+      }
+    },
+    {
+      "TWIN-CACM-1": {
+        "kind": "mirror",
+        "target": "CACM",
+        "true_reliability": 0.0,
+        "learned_mean": 0.129,
+        "learned_lower": 0.0868,
+        "n_obs": 52,
+        "realised": 0.0
+      },
+      "TWIN-MED-2": {
+        "kind": "mirror",
+        "target": "MED",
+        "true_reliability": 0.2,
+        "learned_mean": 0.425,
+        "learned_lower": 0.3478,
+        "n_obs": 30,
+        "realised": 0.3
+      },
+      "TWIN-NPL-3": {
+        "kind": "mirror",
+        "target": "NPL",
+        "true_reliability": 0.4,
+        "learned_mean": 0.4466,
+        "learned_lower": 0.3979,
+        "n_obs": 93,
+        "realised": 0.4086
+      },
+      "TWIN-CRAN-4": {
+        "kind": "mirror",
+        "target": "CRAN",
+        "true_reliability": 0.6,
+        "learned_mean": 0.6681,
+        "learned_lower": 0.6374,
+        "n_obs": 225,
+        "realised": 0.6622
+      },
+      "TWIN-CISI-5": {
+        "kind": "mirror",
+        "target": "CISI",
+        "true_reliability": 0.8,
+        "learned_mean": 0.8372,
+        "learned_lower": 0.7976,
+        "n_obs": 76,
+        "realised": 0.8421
+      },
+      "CACM": {
+        "kind": "genuine",
+        "target": "CACM",
+        "true_reliability": 0.9808,
+        "learned_mean": 0.9516,
+        "learned_lower": 0.9246,
+        "n_obs": 52,
+        "realised": 0.9808
+      },
+      "MED": {
+        "kind": "genuine",
+        "target": "MED",
+        "true_reliability": 1.0,
+        "learned_mean": 0.95,
+        "learned_lower": 0.916,
+        "n_obs": 30,
+        "realised": 1.0
+      },
+      "NPL": {
+        "kind": "genuine",
+        "target": "NPL",
+        "true_reliability": 0.9677,
+        "learned_mean": 0.9515,
+        "learned_lower": 0.9304,
+        "n_obs": 93,
+        "realised": 0.9677
+      },
+      "CRAN": {
+        "kind": "genuine",
+        "target": "CRAN",
+        "true_reliability": 0.9689,
+        "learned_mean": 0.9617,
+        "learned_lower": 0.9492,
+        "n_obs": 225,
+        "realised": 0.9689
+      },
+      "CISI": {
+        "kind": "genuine",
+        "target": "CISI",
+        "true_reliability": 1.0,
+        "learned_mean": 0.9767,
+        "learned_lower": 0.9606,
+        "n_obs": 76,
+        "realised": 1.0
+      },
+      "SCIFACT": {
+        "kind": "genuine",
+        "target": "SCIFACT",
+        "true_reliability": 0.9,
+        "learned_mean": 0.8968,
+        "learned_lower": 0.8795,
+        "n_obs": 300,
+        "realised": 0.9
       }
     }
   ],
@@ -340,6 +367,16 @@
       "realised": 0.9677,
       "n_obs": 93.0
     },
+    "SCIFACT": {
+      "kind": "genuine",
+      "target": "SCIFACT",
+      "true_reliability": 0.9,
+      "learned_mean": 0.8968,
+      "learned_mean_std": 0.0,
+      "learned_lower": 0.8795,
+      "realised": 0.9,
+      "n_obs": 300.0
+    },
     "TWIN-CACM-1": {
       "kind": "mirror",
       "target": "CACM",
@@ -355,46 +392,46 @@
       "target": "CISI",
       "true_reliability": 0.8,
       "learned_mean": 0.7984,
-      "learned_mean_std": 0.0239,
-      "learned_lower": 0.7555,
-      "realised": 0.7982,
+      "learned_mean_std": 0.029,
+      "learned_lower": 0.7556,
+      "realised": 0.7983,
       "n_obs": 76.0
     },
     "TWIN-CRAN-4": {
       "kind": "mirror",
       "target": "CRAN",
       "true_reliability": 0.6,
-      "learned_mean": 0.5972,
-      "learned_mean_std": 0.0323,
-      "learned_lower": 0.5653,
-      "realised": 0.5882,
+      "learned_mean": 0.6241,
+      "learned_mean_std": 0.0365,
+      "learned_lower": 0.5927,
+      "realised": 0.6163,
       "n_obs": 225.0
     },
     "TWIN-MED-2": {
       "kind": "mirror",
       "target": "MED",
       "true_reliability": 0.2,
-      "learned_mean": 0.375,
-      "learned_mean_std": 0.0736,
-      "learned_lower": 0.3004,
-      "realised": 0.2333,
+      "learned_mean": 0.3667,
+      "learned_mean_std": 0.0656,
+      "learned_lower": 0.2922,
+      "realised": 0.2222,
       "n_obs": 30.0
     },
     "TWIN-NPL-3": {
       "kind": "mirror",
       "target": "NPL",
       "true_reliability": 0.4,
-      "learned_mean": 0.4498,
-      "learned_mean_std": 0.03,
-      "learned_lower": 0.4012,
-      "realised": 0.4122,
+      "learned_mean": 0.4175,
+      "learned_mean_std": 0.0238,
+      "learned_lower": 0.3692,
+      "realised": 0.3763,
       "n_obs": 93.0
     }
   },
   "calibration": {
-    "mae_all": 0.0484,
-    "pearson_all": 0.9954,
-    "mae_mirror": 0.0716,
-    "pearson_mirror": 0.9878
+    "mae_all": 0.0425,
+    "pearson_all": 0.9956,
+    "mae_mirror": 0.0678,
+    "pearson_mirror": 0.9875
   }
 }

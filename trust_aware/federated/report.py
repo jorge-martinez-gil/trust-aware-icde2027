@@ -78,9 +78,10 @@ def table_testbed() -> str:
         )
     total_docs = sum(row["docs"] for row in rows)
     total_queries = sum(row["queries"] for row in rows)
+    n_domains = len({row["domain"] for row in rows})
     lines += [
         r"\midrule",
-        f"\\textbf{{Total}} & 5 domains & {total_docs} & {total_queries} & -- & -- \\\\",
+        f"\\textbf{{Total}} & {n_domains} domains & {total_docs} & {total_queries} & -- & -- \\\\",
         r"\bottomrule",
         r"\end{tabular}",
     ]

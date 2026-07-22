@@ -2,7 +2,7 @@
 
 Two settings are evaluated on the same real collections:
 
-A. **Clean federation** -- the five real collections as sources.
+A. **Clean federation** -- the six real collections as sources.
 B. **Untrusted federation** -- additional lexically-attractive but unreliable
    sources are injected (exact-content mirrors that never contain judged
    relevant documents). This models the AI-native reality of low-quality or

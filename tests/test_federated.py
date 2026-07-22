@@ -32,9 +32,9 @@ class TestTestbed(unittest.TestCase):
     def setUpClass(cls):
         cls.tb = load_testbed()
 
-    def test_five_collections(self):
+    def test_six_collections(self):
         self.assertEqual(set(self.tb.collections), {
-            "CACM", "MED", "NPL", "CRAN", "CISI"})
+            "CACM", "MED", "NPL", "CRAN", "CISI", "SCIFACT"})
 
     def test_doc_counts(self):
         # Known sizes of the classic collections.
@@ -42,6 +42,18 @@ class TestTestbed(unittest.TestCase):
         self.assertEqual(self.tb.collections["MED"].num_docs(), 1033)
         self.assertEqual(self.tb.collections["NPL"].num_docs(), 11429)
         self.assertEqual(self.tb.collections["CRAN"].num_docs(), 1400)
+        # BEIR SciFact corpus; test split contributes 300 judged queries.
+        self.assertEqual(self.tb.collections["SCIFACT"].num_docs(), 5183)
+        self.assertEqual(self.tb.collections["SCIFACT"].num_queries(), 300)
+
+    def test_scifact_judgments_are_sparse(self):
+        # SciFact averages ~1.1 relevant docs per claim, an order of magnitude
+        # sparser than the classic collections. Guards the split choice: pulling
+        # in the train split would change this.
+        c = self.tb.collections["SCIFACT"]
+        rel_per_query = sum(len(v) for v in c.qrels.values()) / c.num_queries()
+        self.assertLess(rel_per_query, 2.0)
+        self.assertGreater(rel_per_query, 1.0)
 
     def test_qrels_reference_real_docs(self):
         for c in self.tb.collections.values():
@@ -207,8 +219,9 @@ class TestHeadlineClaim(unittest.TestCase):
         self.assertEqual(analysis["independent_unit"], "query")
         self.assertEqual(len(analysis["comparisons"]), 4)
         for comparison in analysis["comparisons"].values():
-            self.assertEqual(comparison["n_clusters"], 476)
-            self.assertEqual(comparison["n_observations"], 1428)
+            # 776 judged queries across the six collections, x3 seed replicates.
+            self.assertEqual(comparison["n_clusters"], 776)
+            self.assertEqual(comparison["n_observations"], 776 * 3)
             self.assertTrue(comparison["reject_H0"])
             self.assertGreater(comparison["rank_biserial"], 0.70)
 

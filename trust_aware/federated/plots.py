@@ -74,6 +74,20 @@ def _polish(ax):
     ax.grid(axis="y")
 
 
+def _legend_above(ax, handles=None, labels=None, ncol=3, fontsize=7.5):
+    """Place the legend in a horizontal strip above the axes so it can never
+    collide with data, tick labels, or annotations inside the plotting area."""
+    kw = dict(
+        frameon=False, loc="lower left", bbox_to_anchor=(-0.02, 1.0),
+        ncol=ncol, fontsize=fontsize, columnspacing=1.0,
+        handlelength=1.8, handletextpad=0.5, borderaxespad=0.0,
+    )
+    if handles is not None:
+        return ax.legend(handles=handles, labels=labels, **kw) if labels \
+            else ax.legend(handles=handles, **kw)
+    return ax.legend(**kw)
+
+
 def _load_sweep_multiseed():
     seeds = [7, 11, 13]
     data = {}
@@ -96,9 +110,9 @@ def _multiseed_has_methods(methods: List[str]) -> bool:
     return all(method in available for method in methods)
 
 
-def fig_robustness(metric_key: str, ylabel: str, name: str):
+def fig_robustness(metric_key: str, ylabel: str, name: str, legend: bool = True):
     data, counts = _load_sweep_multiseed()
-    fig, ax = plt.subplots(figsize=(3.45, 2.55), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(3.45, 2.3), constrained_layout=True)
     for m in ORDER:
         means, stds = [], []
         for c in counts:
@@ -115,7 +129,11 @@ def fig_robustness(metric_key: str, ylabel: str, name: str):
     ax.set_ylabel(ylabel)
     ax.set_xticks(counts)
     ax.set_ylim(0, 1.02)
-    ax.legend(ncol=2, frameon=False, loc="lower left", handlelength=2.4)
+    if legend:
+        # Legend strip above the axes; the nDCG panel is stacked directly
+        # below this one in the paper and shares the same series, so it
+        # omits the legend to keep the float within the text block.
+        _legend_above(ax, ncol=3)
     _polish(ax)
     _save(fig, name)
 
@@ -124,7 +142,7 @@ def fig_learning_curve(name="fig_learning_curve"):
     """Rolling routing accuracy over the query stream at n=6 (online calibration)."""
     with open(os.path.join(RES, "multiseed.json"), encoding="utf-8") as fh:
         multiseed = json.load(fh)
-    fig, ax = plt.subplots(figsize=(3.45, 2.55), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(3.45, 2.3), constrained_layout=True)
     W = 60
     for method in ["Trust-Aware", "CORI", "ReDDE"]:
         curves = []
@@ -162,7 +180,7 @@ def fig_trust_bars(name="fig_learned_trust"):
     is_twin = [is_twin[i] for i in order]
     colors = [STYLE["CORI"]["color"] if twin else STYLE["Trust-Aware"]["color"]
               for twin in is_twin]
-    fig, ax = plt.subplots(figsize=(3.55, 2.65), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(3.55, 2.35), constrained_layout=True)
     ax.bar(range(len(names)), lbs, color=colors, width=0.78,
            edgecolor="white", linewidth=0.4)
     ax.set_xticks(range(len(names)))
@@ -177,12 +195,12 @@ def fig_trust_bars(name="fig_learned_trust"):
     ax.set_ylim(0, 0.84)
     from matplotlib.patches import Patch
     from matplotlib.lines import Line2D
-    ax.legend(handles=[
+    _legend_above(ax, handles=[
         Patch(color=STYLE["Trust-Aware"]["color"], label="genuine"),
         Patch(color=STYLE["CORI"]["color"], label="untrusted twin"),
         Line2D([0], [0], color="#555555", ls=":", lw=1.0,
                label="prior lower bound"),
-    ], frameon=False, loc="upper right")
+    ], ncol=3, fontsize=7)
     _polish(ax)
     _save(fig, name)
 
@@ -207,7 +225,9 @@ def fig_clean_vs_untrusted(name="fig_clean_vs_untrusted"):
         ax.set_xticks(x); ax.set_xticklabels(methods, rotation=20, ha="right")
         ax.set_title(lab); ax.set_ylim(0, 1.0)
         _polish(ax)
-    axes[0].legend(frameon=False, loc="upper right", fontsize=7)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside upper center", ncol=2,
+               frameon=False, fontsize=8)
     _save(fig, name)
 
 
@@ -274,7 +294,9 @@ def fig_adversary_variants(name="fig_adversary_variants"):
         ax.set_title(title)
         ax.set_ylim(0, 1.0)
         _polish(ax)
-    axes[0].legend(frameon=False, loc="upper right")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside upper center", ncol=2,
+               frameon=False, fontsize=8)
     _save(fig, name)
 
 
@@ -284,24 +306,32 @@ def fig_testbed(name="fig_testbed"):
     rows = study["testbed_summary"]
     names = [r["collection"] for r in rows]
     docs = [r["docs"] for r in rows]; q = [r["queries"] for r in rows]
-    fig, ax1 = plt.subplots(figsize=(5.4, 3.4))
+    c_docs = STYLE["Trust-Aware"]["color"]
+    c_q = STYLE["ReDDE"]["color"]
+    fig, ax1 = plt.subplots(figsize=(6.0, 2.9), constrained_layout=True)
     x = np.arange(len(names))
-    ax1.bar(x - 0.2, docs, 0.4, color="#1f77b4", label="documents")
-    ax1.set_ylabel("documents", color="#1f77b4")
+    ax1.bar(x - 0.2, docs, 0.4, color=c_docs, label="documents")
+    ax1.set_ylabel("documents (log scale)", color=c_docs)
     ax1.set_yscale("log")
+    ax1.tick_params(axis="y", labelcolor=c_docs)
     ax2 = ax1.twinx()
-    ax2.bar(x + 0.2, q, 0.4, color="#ff7f0e", label="queries")
-    ax2.set_ylabel("queries (with qrels)", color="#ff7f0e")
-    ax1.set_xticks(x); ax1.set_xticklabels(
-        [f"{r['collection']}\n({r['domain'].split()[0]})" for r in rows], fontsize=8)
-    ax1.set_title("Federated testbed: five heterogeneous real collections")
+    ax2.bar(x + 0.2, q, 0.4, color=c_q, label="queries")
+    ax2.set_ylabel("queries (with qrels)", color=c_q)
+    ax2.tick_params(axis="y", labelcolor=c_q)
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(
+        [f"{r['collection']}\n({r['domain'].split()[0]})" for r in rows],
+        fontsize=7.5)
+    ax1.spines["top"].set_visible(False)
+    ax2.spines["top"].set_visible(False)
     _save(fig, name)
 
 
 def generate_all():
     fig_robustness("R@1", "Routing accuracy (R@1)", "fig_robustness_routing")
     fig_robustness(
-        "nDCG@10(b=1)", "nDCG@10 (budget=1)", "fig_robustness_ndcg"
+        "nDCG@10(b=1)", "nDCG@10 (budget=1)", "fig_robustness_ndcg",
+        legend=False,
     )
     fig_learning_curve()
     fig_trust_bars()

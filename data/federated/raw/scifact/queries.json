@@ -1,0 +1,1204 @@
+{
+ "QUERIES": [
+  {
+   "QUERYID": "1",
+   "QUERY": "0-dimensional biomaterials show inductive properties."
+  },
+  {
+   "QUERYID": "3",
+   "QUERY": "1,000 genomes project enables mapping of genetic sequence variation consisting of rare variants with larger penetrance effects than common variants."
+  },
+  {
+   "QUERYID": "5",
+   "QUERY": "1/2000 in UK have abnormal PrP positivity."
+  },
+  {
+   "QUERYID": "13",
+   "QUERY": "5% of perinatal mortality is due to low birth weight."
+  },
+  {
+   "QUERYID": "36",
+   "QUERY": "A deficiency of vitamin B12 increases blood levels of homocysteine."
+  },
+  {
+   "QUERYID": "42",
+   "QUERY": "A high microerythrocyte count raises vulnerability to severe anemia in homozygous alpha (+)- thalassemia trait subjects."
+  },
+  {
+   "QUERYID": "48",
+   "QUERY": "A total of 1,000 people in the UK are asymptomatic carriers of vCJD infection."
+  },
+  {
+   "QUERYID": "49",
+   "QUERY": "ADAR1 binds to Dicer to cleave pre-miRNA."
+  },
+  {
+   "QUERYID": "50",
+   "QUERY": "AIRE is expressed in some skin tumors."
+  },
+  {
+   "QUERYID": "51",
+   "QUERY": "ALDH1 expression is associated with better breast cancer outcomes."
+  },
+  {
+   "QUERYID": "53",
+   "QUERY": "ALDH1 expression is associated with poorer prognosis in breast cancer."
+  },
+  {
+   "QUERYID": "54",
+   "QUERY": "AMP-activated protein kinase (AMPK) activation increases inflammation-related fibrosis in the lungs."
+  },
+  {
+   "QUERYID": "56",
+   "QUERY": "APOE4 expression in iPSC-derived neurons increases AlphaBeta production and tau phosphorylation causing GABA neuron degeneration."
+  },
+  {
+   "QUERYID": "57",
+   "QUERY": "APOE4 expression in iPSC-derived neurons increases AlphaBeta production and tau phosphorylation, delaying GABA neuron degeneration."
+  },
+  {
+   "QUERYID": "70",
+   "QUERY": "Activation of PPM1D suppresses p53 function."
+  },
+  {
+   "QUERYID": "72",
+   "QUERY": "Activator-inhibitor pairs are provided dorsally by Admpchordin."
+  },
+  {
+   "QUERYID": "75",
+   "QUERY": "Active H. pylori urease has a polymeric structure that compromises two subunits, UreA and UreB."
+  },
+  {
+   "QUERYID": "94",
+   "QUERY": "Albendazole is used to treat lymphatic filariasis."
+  },
+  {
+   "QUERYID": "99",
+   "QUERY": "Alizarin forms hydrogen bonds with residues involved in PGAM1 substrate binding."
+  },
+  {
+   "QUERYID": "100",
+   "QUERY": "All hematopoietic stem cells segregate their chromosomes randomly."
+  },
+  {
+   "QUERYID": "113",
+   "QUERY": "Angiotensin converting enzyme inhibitors are associated with increased risk for functional renal insufficiency."
+  },
+  {
+   "QUERYID": "115",
+   "QUERY": "Anthrax spores can be disposed of easily after they are dispersed."
+  },
+  {
+   "QUERYID": "118",
+   "QUERY": "Antibiotic induced alterations in the gut microbiome reduce resistance against Clostridium difficile"
+  },
+  {
+   "QUERYID": "124",
+   "QUERY": "Antiretroviral therapy reduces rates of tuberculosis across a broad range of CD4 strata."
+  },
+  {
+   "QUERYID": "127",
+   "QUERY": "Arginine 90 in p150n is important for interaction with EB1."
+  },
+  {
+   "QUERYID": "128",
+   "QUERY": "Arterioles have a larger lumen diameter than venules."
+  },
+  {
+   "QUERYID": "129",
+   "QUERY": "Articles published in open access format are less likely to be cited than traditional journals."
+  },
+  {
+   "QUERYID": "130",
+   "QUERY": "Articles published in open access format are more likely to be cited than traditional journals."
+  },
+  {
+   "QUERYID": "132",
+   "QUERY": "Aspirin inhibits the production of PGE2."
+  },
+  {
+   "QUERYID": "133",
+   "QUERY": "Assembly of invadopodia is triggered by focal generation of phosphatidylinositol-3,4-biphosphate and the activation of the nonreceptor tyrosine kinase Src."
+  },
+  {
+   "QUERYID": "137",
+   "QUERY": "Asymptomatic visual impairment screening in elderly populations does not lead to improved vision."
+  },
+  {
+   "QUERYID": "141",
+   "QUERY": "Auditory entrainment is strengthened when people see congruent visual and auditory information."
+  },
+  {
+   "QUERYID": "142",
+   "QUERY": "Autologous transplantation of mesenchymal stem cells causes a higher rate of opportunistic infections than induction therapy with anti-interleukin-2 receptor antibodies."
+  },
+  {
+   "QUERYID": "143",
+   "QUERY": "Autologous transplantation of mesenchymal stem cells causes fewer opportunistic infections than induction therapy with anti-interleukin-2 receptor antibodies."
+  },
+  {
+   "QUERYID": "146",
+   "QUERY": "Autologous transplantation of mesenchymal stem cells has lower rates of rejection than induction therapy with anti-interleukin-2 receptor antibodies."
+  },
+  {
+   "QUERYID": "148",
+   "QUERY": "Autophagy declines in aged organisms."
+  },
+  {
+   "QUERYID": "163",
+   "QUERY": "Bariatric surgery has a positive impact on mental health."
+  },
+  {
+   "QUERYID": "171",
+   "QUERY": "Basophils counteract disease development in patients with systemic lupus erythematosus (SLE)."
+  },
+  {
+   "QUERYID": "179",
+   "QUERY": "Birth-weight is positively associated with breast cancer."
+  },
+  {
+   "QUERYID": "180",
+   "QUERY": "Blocking the interaction between TDP-43 and respiratory complex I proteins ND3 and ND6 leads to increased TDP-43-induced neuronal loss."
+  },
+  {
+   "QUERYID": "183",
+   "QUERY": "Bone marrow cells contribute to adult macrophage compartments."
+  },
+  {
+   "QUERYID": "185",
+   "QUERY": "Breast cancer development is determined exclusively by genetic factors."
+  },
+  {
+   "QUERYID": "198",
+   "QUERY": "CCL19 is absent within dLNs."
+  },
+  {
+   "QUERYID": "208",
+   "QUERY": "CHEK2 is not associated with breast cancer."
+  },
+  {
+   "QUERYID": "212",
+   "QUERY": "CR is associated with higher methylation age."
+  },
+  {
+   "QUERYID": "213",
+   "QUERY": "CRP is not predictive of postoperative mortality following Coronary Artery Bypass Graft (CABG) surgery."
+  },
+  {
+   "QUERYID": "216",
+   "QUERY": "CX3CR1 on the Th2 cells impairs T cell survival"
+  },
+  {
+   "QUERYID": "217",
+   "QUERY": "CX3CR1 on the Th2 cells promotes T cell survival"
+  },
+  {
+   "QUERYID": "218",
+   "QUERY": "CX3CR1 on the Th2 cells promotes airway inflammation."
+  },
+  {
+   "QUERYID": "219",
+   "QUERY": "CX3CR1 on the Th2 cells suppresses airway inflammation."
+  },
+  {
+   "QUERYID": "230",
+   "QUERY": "Carriers of the alcohol aldehyde dehydrogenase deficiency mutation drink less that non-carries."
+  },
+  {
+   "QUERYID": "232",
+   "QUERY": "Cataract and trachoma are the primary cause of blindness in Southern Sudan."
+  },
+  {
+   "QUERYID": "233",
+   "QUERY": "Cell autonomous sex determination in somatic cells does not occur in Galliformes."
+  },
+  {
+   "QUERYID": "236",
+   "QUERY": "Cell autonomous sex determination in somatic cells occurs in Passeriformes."
+  },
+  {
+   "QUERYID": "237",
+   "QUERY": "Cells lacking clpC have a defect in sporulation efficiency in Bacillus subtilis."
+  },
+  {
+   "QUERYID": "238",
+   "QUERY": "Cells undergoing methionine restriction may activate miRNAs."
+  },
+  {
+   "QUERYID": "239",
+   "QUERY": "Cellular aging closely links to an older appearance."
+  },
+  {
+   "QUERYID": "248",
+   "QUERY": "Chenodeosycholic acid treatment increases whole-body energy expenditure."
+  },
+  {
+   "QUERYID": "249",
+   "QUERY": "Chenodeosycholic acid treatment reduces whole-body energy expenditure."
+  },
+  {
+   "QUERYID": "261",
+   "QUERY": "Chronic aerobic exercise alters endothelial function, improving vasodilating mechanisms mediated by NO."
+  },
+  {
+   "QUERYID": "268",
+   "QUERY": "Cold exposure increases BAT recruitment."
+  },
+  {
+   "QUERYID": "269",
+   "QUERY": "Cold exposure reduces BAT recruitment."
+  },
+  {
+   "QUERYID": "274",
+   "QUERY": "Combination nicotine replacement therapies with varenicline or bupropion lead to significantly higher long-term abstinence rates at 52 weeks than varenicline monotherapy."
+  },
+  {
+   "QUERYID": "275",
+   "QUERY": "Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors."
+  },
+  {
+   "QUERYID": "279",
+   "QUERY": "Commelina yellow mottle virus' (ComYMV) genome consists of 7489 baise pairs."
+  },
+  {
+   "QUERYID": "294",
+   "QUERY": "Crossover hot spots are not found within gene promoters in Saccharomyces cerevisiae."
+  },
+  {
+   "QUERYID": "295",
+   "QUERY": "Crosstalk between dendritic cells (DCs) and innate lymphoid cells (ILCs) is important in the regulation of intestinal homeostasis."
+  },
+  {
+   "QUERYID": "298",
+   "QUERY": "Cytochrome c is released from the mitochondrial intermembrane space to cytosol during apoptosis."
+  },
+  {
+   "QUERYID": "300",
+   "QUERY": "Cytosolic proteins bind to iron-responsive elements on mRNAs coding for DMT1. Cytosolic proteins bind to iron-responsive elements on mRNAs coding for proteins involved in iron uptake."
+  },
+  {
+   "QUERYID": "303",
+   "QUERY": "DMRT1 is a sex-determining gene that is epigenetically regulated by the MHM region."
+  },
+  {
+   "QUERYID": "312",
+   "QUERY": "De novo assembly of sequence data has more specific contigs than unassembled sequence data."
+  },
+  {
+   "QUERYID": "314",
+   "QUERY": "Deamination of cytidine to uridine on the minus strand of viral DNA results in catastrophic G-to-A mutations in the viral genome."
+  },
+  {
+   "QUERYID": "324",
+   "QUERY": "Deleting Raptor reduces G-CSF levels."
+  },
+  {
+   "QUERYID": "327",
+   "QUERY": "Deletion of \u03b1v\u03b28 does not result in a spontaneous inflammatory phenotype."
+  },
+  {
+   "QUERYID": "338",
+   "QUERY": "Dexamethasone decreases risk of postoperative bleeding."
+  },
+  {
+   "QUERYID": "343",
+   "QUERY": "Diabetic patients with acute coronary syndrome experience increased short-term and long-term risk for bleeding events."
+  },
+  {
+   "QUERYID": "350",
+   "QUERY": "Discrimination between the initiator and elongation tRNAs depends on the translation initiation factor IF3."
+  },
+  {
+   "QUERYID": "354",
+   "QUERY": "Downregulation and mislocalization of Scribble prevents cell transformation and mammary tumorigenesis."
+  },
+  {
+   "QUERYID": "362",
+   "QUERY": "During the primary early antibody response activated B cells migrate toward the inner-and outer paracortical areas where oxysterol accumulation is generated by stromal cells."
+  },
+  {
+   "QUERYID": "380",
+   "QUERY": "Enhanced early production of inflammatory chemokines improves viral control in the lung."
+  },
+  {
+   "QUERYID": "384",
+   "QUERY": "Epidemiological disease burden from noncommunicable diseases is more prevalent in low economic settings."
+  },
+  {
+   "QUERYID": "385",
+   "QUERY": "Epigenetic modulating agents (EMAs) modulate antitumor immune response in a cancer model system."
+  },
+  {
+   "QUERYID": "386",
+   "QUERY": "Errors in peripheral IV drug administration are most common during bolus administration and multiple-step medicine preparations."
+  },
+  {
+   "QUERYID": "388",
+   "QUERY": "Ethanol stress decreases the expression of IBP in bacteria."
+  },
+  {
+   "QUERYID": "399",
+   "QUERY": "Exposure to fine particulate air pollution is relate to anxiety prevalence."
+  },
+  {
+   "QUERYID": "410",
+   "QUERY": "Febrile seizures increase the threshold for development of epilepsy."
+  },
+  {
+   "QUERYID": "411",
+   "QUERY": "Febrile seizures reduce the threshold for development of epilepsy."
+  },
+  {
+   "QUERYID": "415",
+   "QUERY": "Female carriers of the Apolipoprotein E4 (APOE4) allele have increased risk for dementia."
+  },
+  {
+   "QUERYID": "421",
+   "QUERY": "Flexible molecules experience greater steric hindrance in the tumor microenviroment than rigid molecules."
+  },
+  {
+   "QUERYID": "431",
+   "QUERY": "FoxO3a activation in neuronal death is mediated by reactive oxygen species (ROS)."
+  },
+  {
+   "QUERYID": "436",
+   "QUERY": "Free histones are degraded by a Rad53-dependent mechanism once DNA has been replicated."
+  },
+  {
+   "QUERYID": "437",
+   "QUERY": "Functional consequences of genomic alterations due to Myelodysplastic syndrome (MDS) are poorly understood due to the lack of an animal model."
+  },
+  {
+   "QUERYID": "439",
+   "QUERY": "Fz/PCP-dependent Pk localizes to the anterior membrane of neuroectoderm cells during zebrafish neuralation"
+  },
+  {
+   "QUERYID": "440",
+   "QUERY": "Fz/PCP-dependent Pk localizes to the anterior membrane of notochord cells during zebrafish neuralation."
+  },
+  {
+   "QUERYID": "443",
+   "QUERY": "GATA-3 is important for hematopoietic stem cell (HSC) function."
+  },
+  {
+   "QUERYID": "452",
+   "QUERY": "Gene expression does not vary appreciably across genetically identical cells."
+  },
+  {
+   "QUERYID": "475",
+   "QUERY": "Glycolysis is one of the primary glycometabolic pathways in cells."
+  },
+  {
+   "QUERYID": "478",
+   "QUERY": "Golli-deficient T-cells prefer to differentiate into an anergic phenotype in the adaptive immune response when there are increased levels of Ca2+ in the cytosol."
+  },
+  {
+   "QUERYID": "491",
+   "QUERY": "HNF4A mutations can cause diabetes in mutant carriers by the age of 14 years"
+  },
+  {
+   "QUERYID": "501",
+   "QUERY": "Headaches are not correlated with cognitive impairment."
+  },
+  {
+   "QUERYID": "502",
+   "QUERY": "Healthcare delivery efficiency in crowded delivery centers is impaired by improving structural, logistical, and interpersonal elements."
+  },
+  {
+   "QUERYID": "507",
+   "QUERY": "Helminths interfere with immune system control of macrophages activated by IL-4 favor Mycobacterium tuberculosis replication."
+  },
+  {
+   "QUERYID": "508",
+   "QUERY": "Hematopoietic Stem Cell purification reaches purity rate of up to 50%."
+  },
+  {
+   "QUERYID": "513",
+   "QUERY": "High cardiopulmonary fitness causes increased mortality rate."
+  },
+  {
+   "QUERYID": "514",
+   "QUERY": "High dietary calcium intakes are unnecessary for prevention of secondary hyperparathyroidism in subjects with 25(OH)D levels above 75 nmol/liter."
+  },
+  {
+   "QUERYID": "516",
+   "QUERY": "High levels of CRP reduces the risk of exacerbations in chronic obstructive pulmonary disease (COPD)."
+  },
+  {
+   "QUERYID": "517",
+   "QUERY": "High levels of copeptin decrease risk of diabetes."
+  },
+  {
+   "QUERYID": "521",
+   "QUERY": "High-sensitivity cardiac troponin T (HSCT-T) dosage may not be diagnostic if the onset of symptoms occurs less than 3 hours before acute myocardial injury (AMI)."
+  },
+  {
+   "QUERYID": "525",
+   "QUERY": "Histone demethylase recruitment and a transient decrease in histone methylation is necessary for ligand-dependent induction of transcription by nuclear receptors."
+  },
+  {
+   "QUERYID": "527",
+   "QUERY": "Homozygous deletion of murine Sbds gene from osterix-expressing mesenchymal stem and progenitor cells (MPCs) prevents oxidative stress."
+  },
+  {
+   "QUERYID": "528",
+   "QUERY": "Human T-lymphotropic virus type-I-associated myelopathy / tropical spastic paraparesis (HAM/TSP) patients produce Immunoglobulin G (IgG) antibodies which cross-react with an immunodominant epitope in Tax."
+  },
+  {
+   "QUERYID": "532",
+   "QUERY": "Hyperfibrinogenemia decreases rates of femoropopliteal bypass thrombosis."
+  },
+  {
+   "QUERYID": "533",
+   "QUERY": "Hyperfibrinogenemia increases rates of femoropopliteal bypass thrombosis."
+  },
+  {
+   "QUERYID": "535",
+   "QUERY": "Hypertension is frequently observed in type 1 diabetes patients."
+  },
+  {
+   "QUERYID": "536",
+   "QUERY": "Hypocretin neurones induce panicprone state in rats."
+  },
+  {
+   "QUERYID": "539",
+   "QUERY": "Hypoglycemia increases the risk of dementia."
+  },
+  {
+   "QUERYID": "540",
+   "QUERY": "Hypothalamic glutamate neurotransmission is crucial to energy balance."
+  },
+  {
+   "QUERYID": "544",
+   "QUERY": "IFIT1 restricts viral replication by sequestrating mis-capped viral RNAs."
+  },
+  {
+   "QUERYID": "549",
+   "QUERY": "IRG1 has antiviral effects against neurotropic viruses."
+  },
+  {
+   "QUERYID": "551",
+   "QUERY": "ITAM phosphorylation prevents the transfer of the T cell receptor (TCR) signal from the echo-domain to the cytoplasmic tail of the T cell receptor (TCR)."
+  },
+  {
+   "QUERYID": "552",
+   "QUERY": "IgA plasma cells that are specific for transglutaminase 2 accumulate in the duodenal mucosa on commencement of a gluten-free diet."
+  },
+  {
+   "QUERYID": "554",
+   "QUERY": "Immune complex triggered cell death leads to extracellular release of neutrophil protein HMGB1."
+  },
+  {
+   "QUERYID": "560",
+   "QUERY": "Immune responses result in the development of inflammatory Th17 cells and anti-inflammatory iTregs."
+  },
+  {
+   "QUERYID": "569",
+   "QUERY": "In adult tissue, most T cells are memory T cells."
+  },
+  {
+   "QUERYID": "575",
+   "QUERY": "In domesticated populations of Saccharomyces cerevisiae, whole chromosome aneuploidy is very uncommon."
+  },
+  {
+   "QUERYID": "577",
+   "QUERY": "In mice, P. chabaudi parasites are able to proliferate faster early in infection when inoculated at lower numbers than when inoculated at high numbers."
+  },
+  {
+   "QUERYID": "578",
+   "QUERY": "In mouse models, the loss of CSF1R facilitates MOZ-TIF2-induced leuekmogenesis."
+  },
+  {
+   "QUERYID": "587",
+   "QUERY": "In transgenic mice harboring green florescent protein under the control of the Sox2 promoter, less than ten percent of the cells with green florescent colocalize with cell proliferation markers."
+  },
+  {
+   "QUERYID": "589",
+   "QUERY": "In young and middle-aged adults, current or remote uses of ADHD medications do not increase the risk of serious cardiovascular events."
+  },
+  {
+   "QUERYID": "593",
+   "QUERY": "Incidence of heart failure decreased by 10% in women since 1979."
+  },
+  {
+   "QUERYID": "597",
+   "QUERY": "Incidence rates of cervical cancer have decreased."
+  },
+  {
+   "QUERYID": "598",
+   "QUERY": "Incidence rates of cervical cancer have increased due to nationwide screening programs based primarily on cytology to detect uterine cervical cancer."
+  },
+  {
+   "QUERYID": "613",
+   "QUERY": "Increased microtubule acetylation repairs LRRK2 Roc-COR domain mutation induced locomotor deficits."
+  },
+  {
+   "QUERYID": "619",
+   "QUERY": "Increased vessel density along with a reduction in fibrosis decreases the efficacy of chemotherapy treatments."
+  },
+  {
+   "QUERYID": "623",
+   "QUERY": "Individuals with low serum vitamin D concentrations have increased risk of multiple sclerosis."
+  },
+  {
+   "QUERYID": "628",
+   "QUERY": "Infection of human T-cell lymphotropic virus type 1 is most frequent in individuals of African origin."
+  },
+  {
+   "QUERYID": "636",
+   "QUERY": "Inositol lipid 3-phosphatase PTEN converts Ptdlns(3,4)P 2 into phosphatidylinositol 4-phosphate."
+  },
+  {
+   "QUERYID": "637",
+   "QUERY": "Input from mental and physical health care professionals is effective at decreasing homelessness."
+  },
+  {
+   "QUERYID": "641",
+   "QUERY": "Insomnia can be effectively treated with cognitive behavioral therapy."
+  },
+  {
+   "QUERYID": "644",
+   "QUERY": "Insulin increases risk of severe kidney failure."
+  },
+  {
+   "QUERYID": "649",
+   "QUERY": "Integrating classroom-based collaborative learning with Web-based collaborative learning leads to subpar class performance"
+  },
+  {
+   "QUERYID": "659",
+   "QUERY": "Ivermectin is used to treat lymphatic filariasis."
+  },
+  {
+   "QUERYID": "660",
+   "QUERY": "Ivermectin is used to treat onchocerciasis."
+  },
+  {
+   "QUERYID": "674",
+   "QUERY": "LDL cholesterol has no involvement in the development of cardiovascular disease."
+  },
+  {
+   "QUERYID": "684",
+   "QUERY": "Lack of clpC does not affect sporulation efficiency in Bacillus subtilis cells."
+  },
+  {
+   "QUERYID": "690",
+   "QUERY": "Less than 10% of the gabonese children with Schimmelpenning-Feuerstein-Mims syndrome (SFM) had a plasma lactate of more than 5mmol/L."
+  },
+  {
+   "QUERYID": "691",
+   "QUERY": "Leukemia associated Rho guanine nucleotide-exchange factor represses RhoA in response to SRC activation."
+  },
+  {
+   "QUERYID": "692",
+   "QUERY": "Leuko-increased blood increases infectious complications in red blood cell transfusion."
+  },
+  {
+   "QUERYID": "693",
+   "QUERY": "Leuko-reduced blood reduces infectious complications in red blood cell transfusion."
+  },
+  {
+   "QUERYID": "700",
+   "QUERY": "Localization of PIN1 in the Arabidopsis embryo does not require VPS9a"
+  },
+  {
+   "QUERYID": "702",
+   "QUERY": "Localization of PIN1 in the roots of Arabidopsis does not require VPS9a"
+  },
+  {
+   "QUERYID": "715",
+   "QUERY": "Low expression of miR7a does represses target genes and exerts a biological function in ovaries."
+  },
+  {
+   "QUERYID": "716",
+   "QUERY": "Low expression of miR7a exerts a biological function in testis."
+  },
+  {
+   "QUERYID": "718",
+   "QUERY": "Low nucleosome occupancy correlates with low methylation levels across species."
+  },
+  {
+   "QUERYID": "721",
+   "QUERY": "Lupus-prone mice infected with curliproducing bacteria have higher autoantibody titers compared to controls."
+  },
+  {
+   "QUERYID": "723",
+   "QUERY": "Ly49Q directs the organization of neutrophil migration to inflammation sites by regulating membrane raft functions."
+  },
+  {
+   "QUERYID": "727",
+   "QUERY": "Ly6C hi monocytes have a lower inflammatory capacity compared to their Ly6C lo counterparts."
+  },
+  {
+   "QUERYID": "728",
+   "QUERY": "Ly6C hi monocytes have a lower inflammatory capacity than Ly6C lo monocytes."
+  },
+  {
+   "QUERYID": "729",
+   "QUERY": "Lymphadenopathy is observed in knockin mouse lacking the SHP-2 MAPK pathway."
+  },
+  {
+   "QUERYID": "742",
+   "QUERY": "Macrolides have no protective effect against myocardial infarction."
+  },
+  {
+   "QUERYID": "743",
+   "QUERY": "Macrolides protect against myocardial infarction."
+  },
+  {
+   "QUERYID": "744",
+   "QUERY": "Macropinocytosis contributes to a cell's supply of amino acids via the intracellular uptake of protein."
+  },
+  {
+   "QUERYID": "756",
+   "QUERY": "Many proteins in human cells can be post-translationally modified at lysine residues via acetylation."
+  },
+  {
+   "QUERYID": "759",
+   "QUERY": "Mathematical models predict that using Artemisinin-based combination therapy over nongametocytocidal drugs have a dramatic impact in reducing malaria transmission."
+  },
+  {
+   "QUERYID": "768",
+   "QUERY": "Mercaptopurine is anabolized into the inactive methylmercaptopurine by thiopurine methyltrasnferase (TPMT)."
+  },
+  {
+   "QUERYID": "770",
+   "QUERY": "Metastatic colorectal cancer treated with a single agent fluoropyrimidines resulted in reduced efficacy and lower quality of life when compared with oxaliplatin-based chemotherapy in elderly patients."
+  },
+  {
+   "QUERYID": "775",
+   "QUERY": "Mice defective for deoxyribonucleic acid (DNA) polymerase I (polI) reveal increased sensitivity to ionizing radiation (IR)."
+  },
+  {
+   "QUERYID": "781",
+   "QUERY": "Mice that lack Interferon-\u03b3 or its receptor exhibit high resistance to experimental autoimmune myocarditis."
+  },
+  {
+   "QUERYID": "783",
+   "QUERY": "Mice without IFN-\u03b3 or its receptor are resistant to EAM induced with \u03b1-MyHC/CFA."
+  },
+  {
+   "QUERYID": "784",
+   "QUERY": "MicroRNA is involved in the regulation of Neural Stem Cell (NSC) differentiation and proliferation dynamic homeostasis"
+  },
+  {
+   "QUERYID": "785",
+   "QUERY": "Microarray results from culture-amplified mixtures of serotypes correlate poorly with microarray results from uncultured mixtures."
+  },
+  {
+   "QUERYID": "793",
+   "QUERY": "Mitochondria are uninvolved in apoptosis."
+  },
+  {
+   "QUERYID": "800",
+   "QUERY": "Modifying the epigenome in the brain affects the normal human aging process by affecting certain genes related to neurogenesis."
+  },
+  {
+   "QUERYID": "805",
+   "QUERY": "Monoclonal antibody targeting of N-cadherin inhibits metastasis."
+  },
+  {
+   "QUERYID": "808",
+   "QUERY": "Most termination events in Okazaki fragments are sequence specific."
+  },
+  {
+   "QUERYID": "811",
+   "QUERY": "Mutant mice lacking SVCT2 have greatly increased ascorbic acid levels in both brain and adrenals."
+  },
+  {
+   "QUERYID": "814",
+   "QUERY": "Mutations in G-Beta protein GNB2 are present in many cancers, resulting in loss of interaction with G-alpha subunits and concomitant activation of AKT pathway."
+  },
+  {
+   "QUERYID": "820",
+   "QUERY": "N-terminal cleavage increases success identifying transcription start sites."
+  },
+  {
+   "QUERYID": "821",
+   "QUERY": "N-terminal cleavage reduces success identifying transcription start sites."
+  },
+  {
+   "QUERYID": "823",
+   "QUERY": "N348I mutations cause resistance to zidovudine (AZT)."
+  },
+  {
+   "QUERYID": "830",
+   "QUERY": "NF2 (Merlin) causes phosphorylation and subsequent cytoplasmic sequestration of YAP in Drosophila by activating LATS1/2 kinases."
+  },
+  {
+   "QUERYID": "831",
+   "QUERY": "NF2 (Merlin) prevents phosphorylation and subsequent cytoplasmic sequestration of YAP in Drosophila."
+  },
+  {
+   "QUERYID": "832",
+   "QUERY": "NFAT4 activation requires IP3R-mediated Ca2+ mobilization."
+  },
+  {
+   "QUERYID": "834",
+   "QUERY": "NOX2-independent pathways can generate peroxynitrite by reacting with nitrogen intermediates."
+  },
+  {
+   "QUERYID": "837",
+   "QUERY": "NR5A2 is important in development of endometrial tissues."
+  },
+  {
+   "QUERYID": "839",
+   "QUERY": "Nanoparticles can be targeted against specific cell types by incorporating aptamers into lipid nanoparticles."
+  },
+  {
+   "QUERYID": "845",
+   "QUERY": "Neutrophil extracellular traps (NETs) are released by ANCA-stimulated neutrophils."
+  },
+  {
+   "QUERYID": "847",
+   "QUERY": "New drugs for tuberculosis often do not penetrate the necrotic portion of a tuberculosis lesion in high concentrations."
+  },
+  {
+   "QUERYID": "852",
+   "QUERY": "Non-invasive ventilation use should be decreased if there is inadequate response to conventional treatment."
+  },
+  {
+   "QUERYID": "859",
+   "QUERY": "Normal expression of RUNX1 has tumor-promoting effects."
+  },
+  {
+   "QUERYID": "870",
+   "QUERY": "Obesity decreases life quality."
+  },
+  {
+   "QUERYID": "873",
+   "QUERY": "Obesity is determined solely by environmental factors."
+  },
+  {
+   "QUERYID": "879",
+   "QUERY": "Occupancy of ribosomes by IncRNAs do not make functional peptides."
+  },
+  {
+   "QUERYID": "880",
+   "QUERY": "Occupancy of ribosomes by IncRNAs mirror 5 0-UTRs"
+  },
+  {
+   "QUERYID": "882",
+   "QUERY": "Omnivores produce less trimethylamine N-oxide from dietary I-carnitine than vegetarians."
+  },
+  {
+   "QUERYID": "887",
+   "QUERY": "Only a minority of cells survive development after differentiation into stress-resistant spores."
+  },
+  {
+   "QUERYID": "903",
+   "QUERY": "PD-1 triggering on monocytes reduces IL-10 production by monocytes."
+  },
+  {
+   "QUERYID": "904",
+   "QUERY": "PDPN promotes efficient motility along stromal surfaces by activating the C-type lectin receptor to rearrange the actin cytoskeleton in dendritic cells."
+  },
+  {
+   "QUERYID": "907",
+   "QUERY": "PGE 2 promotes intestinal tumor growth by altering the expression of tumor suppressing and DNA repair genes."
+  },
+  {
+   "QUERYID": "911",
+   "QUERY": "PKG-la plays an essential role in expression of pain hypersensitivity in PGK-la knockout mice."
+  },
+  {
+   "QUERYID": "913",
+   "QUERY": "PPAR-RXRs are inhibited by PPAR ligands."
+  },
+  {
+   "QUERYID": "914",
+   "QUERY": "PPAR-RXRs can be activated by PPAR ligands."
+  },
+  {
+   "QUERYID": "921",
+   "QUERY": "Participating in six months of physical activity improves cognitive functioning."
+  },
+  {
+   "QUERYID": "922",
+   "QUERY": "Patients in stable partnerships have a faster progression from HIV to AIDS."
+  },
+  {
+   "QUERYID": "936",
+   "QUERY": "Peroxynitrite is required for nitration of TCR/CD8."
+  },
+  {
+   "QUERYID": "956",
+   "QUERY": "Pleiotropic coupling of GLP-1R to intracellular effectors promotes distinct profiles of cellular signaling."
+  },
+  {
+   "QUERYID": "957",
+   "QUERY": "Podocytes are motile and migrate in the presence of injury."
+  },
+  {
+   "QUERYID": "960",
+   "QUERY": "Polymeal nutrition reduces cardiovascular mortality."
+  },
+  {
+   "QUERYID": "967",
+   "QUERY": "Pretreatment with the Arp2/3 inhibitor CK-666 affects lamelliopodia formation."
+  },
+  {
+   "QUERYID": "971",
+   "QUERY": "Primary cervical cancer screening with HPV detection has higher longitudinal sensitivity than conventional cytology to detect cervical intraepithelial neoplasia grade 2."
+  },
+  {
+   "QUERYID": "975",
+   "QUERY": "Primary pro-inflammatory cytokines induce secondary pro- and anti-inflammatory mediators."
+  },
+  {
+   "QUERYID": "982",
+   "QUERY": "Proteins synthesized at the growth cone are ubiquitinated at a higher rate than proteins from the cell body."
+  },
+  {
+   "QUERYID": "985",
+   "QUERY": "Pseudogene PTENP1 regulates the expression of PTEN by functioning as an miRNA decoy."
+  },
+  {
+   "QUERYID": "993",
+   "QUERY": "Pyridostatin destabilizes the G - quadruplex in the telomeric region."
+  },
+  {
+   "QUERYID": "1012",
+   "QUERY": "Radioiodine treatment of non-toxic multinodular goitre reduces thyroid volume."
+  },
+  {
+   "QUERYID": "1014",
+   "QUERY": "Rapamycin decreases the concentration of triacylglycerols in fruit flies."
+  },
+  {
+   "QUERYID": "1019",
+   "QUERY": "Rapid phosphotransfer rates govern fidelity in two component systems"
+  },
+  {
+   "QUERYID": "1020",
+   "QUERY": "Rapid up-regulation and higher basal expression of interferon-induced genes increase survival of granule cell neurons that are infected by West Nile virus."
+  },
+  {
+   "QUERYID": "1021",
+   "QUERY": "Rapid up-regulation and higher basal expression of interferon-induced genes reduce survival of granule cell neurons that are infected by West Nile virus."
+  },
+  {
+   "QUERYID": "1024",
+   "QUERY": "Recurrent mutations occur frequently within CTCF anchor sites adjacent to oncogenes."
+  },
+  {
+   "QUERYID": "1029",
+   "QUERY": "Reduced responsiveness to interleukin-2 in regulatory T cells is associated with greater resistance to autoimmune diseases such as Type 1 Diabetes."
+  },
+  {
+   "QUERYID": "1041",
+   "QUERY": "Replacement of histone H2A with H2A.Z slows gene activation in yeasts by stabilizing +1 nucleosomes."
+  },
+  {
+   "QUERYID": "1049",
+   "QUERY": "Ribosomopathies have a low degree of cell and tissue specific pathology."
+  },
+  {
+   "QUERYID": "1062",
+   "QUERY": "S-nitrosylated GAPDH physiologically transnitrosylates histone deacetylases."
+  },
+  {
+   "QUERYID": "1086",
+   "QUERY": "Sildenafil improves erectile function in men who experience sexual dysfunction as a result of the use of SSRI antidepressants."
+  },
+  {
+   "QUERYID": "1088",
+   "QUERY": "Silencing of Bcl2 is important for the maintenance and progression of tumors."
+  },
+  {
+   "QUERYID": "1089",
+   "QUERY": "Smc5/6 engagment drives the activation of SUMO E3 ligase Mms21 by ATP-dependent remolding."
+  },
+  {
+   "QUERYID": "1099",
+   "QUERY": "Statins decrease blood cholesterol."
+  },
+  {
+   "QUERYID": "1100",
+   "QUERY": "Statins increase blood cholesterol."
+  },
+  {
+   "QUERYID": "1104",
+   "QUERY": "Stroke patients with prior use of direct oral anticoagulants have a lower risk of in-hospital mortality than stroke patients with prior use of warfarin."
+  },
+  {
+   "QUERYID": "1107",
+   "QUERY": "Subcutaneous fat depots undergo extensive browning processes after cold exposure."
+  },
+  {
+   "QUERYID": "1110",
+   "QUERY": "Suboptimal nutrition is not predictive of chronic disease"
+  },
+  {
+   "QUERYID": "1121",
+   "QUERY": "Synaptic activity enhances local release of brain derived neurotrophic factor from postsynaptic dendrites."
+  },
+  {
+   "QUERYID": "1130",
+   "QUERY": "T regulatory cells (tTregs) lacking \u03b1v\u03b28 are more adept at suppressing pathogenic T-cell responses during active inflammation."
+  },
+  {
+   "QUERYID": "1132",
+   "QUERY": "TCR/CD3 microdomains are a required to induce the immunologic synapse to activate T cells."
+  },
+  {
+   "QUERYID": "1137",
+   "QUERY": "TNFAIP3 is a tumor suppressor in glioblastoma."
+  },
+  {
+   "QUERYID": "1140",
+   "QUERY": "Taking 400mg of \u03b1-tocopheryl acetate helps to prevent prostate cancer."
+  },
+  {
+   "QUERYID": "1144",
+   "QUERY": "Taxation of sugar-sweetened beverages had no effect on the incidence rate of type II diabetes in India."
+  },
+  {
+   "QUERYID": "1146",
+   "QUERY": "Teaching hospitals do not provide better care than non-teaching hospitals."
+  },
+  {
+   "QUERYID": "1150",
+   "QUERY": "Tetraspanin-3 is a causative factor in the development of acute myelogenous leukemia"
+  },
+  {
+   "QUERYID": "1163",
+   "QUERY": "The DdrB protein from Deinococcus radiodurans is an alternative SSB."
+  },
+  {
+   "QUERYID": "1175",
+   "QUERY": "The PPR MDA5 has two N-terminal CARD domains."
+  },
+  {
+   "QUERYID": "1179",
+   "QUERY": "The PRR MDA5 has a central DExD/H RNA helices domain."
+  },
+  {
+   "QUERYID": "1180",
+   "QUERY": "The PRR MDA5 is a sensor of RNA virus infection."
+  },
+  {
+   "QUERYID": "1185",
+   "QUERY": "The US health care system can save up to $750 million if 7% of patients waiting for kidney transplants participate in the optimized national kidney paired donation program."
+  },
+  {
+   "QUERYID": "1187",
+   "QUERY": "The YAP1 and TEAD complex tanslocates into the nucleus where it interacts with transcription factors and DNA-binding proteins that modulate target gene transcription."
+  },
+  {
+   "QUERYID": "1191",
+   "QUERY": "The amount of publicly available DNA data doubles every 10 years."
+  },
+  {
+   "QUERYID": "1194",
+   "QUERY": "The arm density of TatAd complexes is due to structural rearrangements within Class1 TatAd complexes such as the 'charge zipper mechanism'."
+  },
+  {
+   "QUERYID": "1196",
+   "QUERY": "The availability of safe places to study is effective at decreasing homelessness."
+  },
+  {
+   "QUERYID": "1197",
+   "QUERY": "The availability of safe places to study is not effective at decreasing homelessness."
+  },
+  {
+   "QUERYID": "1199",
+   "QUERY": "The benefits of colchicine were achieved with effective widespread use of secondary prevention strategies such as high-dose statins."
+  },
+  {
+   "QUERYID": "1200",
+   "QUERY": "The binding orientation of the ML-SA1 activator at hTRPML2 is different from the binding orientation of the ML-SA1 activator at hTRPML1."
+  },
+  {
+   "QUERYID": "1202",
+   "QUERY": "The center of the granuloma in an immune cell induces a pro-inflammatory immune response."
+  },
+  {
+   "QUERYID": "1204",
+   "QUERY": "The combination of H3K4me3 and H3K79me2 is found in quiescent hair follicle stem cells."
+  },
+  {
+   "QUERYID": "1207",
+   "QUERY": "The composition of myosin-II isoform switches from the polarizable B isoform to the more homogenous A isoform during hematopoietic differentiation."
+  },
+  {
+   "QUERYID": "1213",
+   "QUERY": "The deregulated and prolonged activation of monocytes has deleterious effects in inflammatory diseases."
+  },
+  {
+   "QUERYID": "1216",
+   "QUERY": "The extracellular domain of TMEM27 is cleaved in human beta cells."
+  },
+  {
+   "QUERYID": "1221",
+   "QUERY": "The genomic aberrations found in matasteses are very similar to those found in the primary tumor."
+  },
+  {
+   "QUERYID": "1225",
+   "QUERY": "The locus rs647161 is associated with colorectal carcinoma."
+  },
+  {
+   "QUERYID": "1226",
+   "QUERY": "The loss of the TET protein functions may have dire biological consequences, such as myeloid cancers."
+  },
+  {
+   "QUERYID": "1232",
+   "QUERY": "The minor G allele of FOXO3 is related to more severe symptoms of Crohn's Disease."
+  },
+  {
+   "QUERYID": "1241",
+   "QUERY": "The myocardial lineage develops from cardiac progenitors of mesodermal origin."
+  },
+  {
+   "QUERYID": "1245",
+   "QUERY": "The one-child policy has been successful in lowering population growth."
+  },
+  {
+   "QUERYID": "1259",
+   "QUERY": "The relationship between a breast cancer patient's capacity to metabolize tamoxifen and treatment outcome is dependent on the patient's genetic make-up."
+  },
+  {
+   "QUERYID": "1262",
+   "QUERY": "The repair of Cas9-induced double strand breaks in human DNA is error-prone."
+  },
+  {
+   "QUERYID": "1266",
+   "QUERY": "The risk of breast cancer among parous women increases with placental weight of pregnancies, and this association is strongest for premenopausal breast cancer."
+  },
+  {
+   "QUERYID": "1270",
+   "QUERY": "The risk of male prisoners harming themselves is ten times that of female prisoners."
+  },
+  {
+   "QUERYID": "1271",
+   "QUERY": "The severity of cardiac involvement in amyloidosis can be described by the degree of transmurality of late gadolinium enhancement in MRI."
+  },
+  {
+   "QUERYID": "1272",
+   "QUERY": "The single flash-evoked ERG b-wave is generated by activity of ON-bipolar cells."
+  },
+  {
+   "QUERYID": "1273",
+   "QUERY": "The sliding activity of kinesin-8 protein Kip3 promotes bipolar spindle assembly."
+  },
+  {
+   "QUERYID": "1274",
+   "QUERY": "The tip of the inner tube of the toxic type VI secretion system (T6SS) antibacterial effector in Escherichia coli (E. coli) carries toxic effector proteins."
+  },
+  {
+   "QUERYID": "1278",
+   "QUERY": "The treatment of cancer patients with co-IR blockade does not cause any adverse autoimmune events."
+  },
+  {
+   "QUERYID": "1279",
+   "QUERY": "The treatment of cancer patients with co-IR blockade precipitates adverse autoimmune events."
+  },
+  {
+   "QUERYID": "1280",
+   "QUERY": "The ureABIEFGH gene cluster encodes urease maturation proteins : UreD/UreH, UreE, UreF, and UreG."
+  },
+  {
+   "QUERYID": "1281",
+   "QUERY": "The ureABIEFGH gene cluster is induced by nickel (II) ion."
+  },
+  {
+   "QUERYID": "1282",
+   "QUERY": "Therapeutic use of the drug Dapsone to treat pyoderma gangrenous is based on anecdotal evidence."
+  },
+  {
+   "QUERYID": "1290",
+   "QUERY": "There is an inverse relationship between hip fractures and statin use."
+  },
+  {
+   "QUERYID": "1292",
+   "QUERY": "There is no association between HNF4A mutations and diabetes risks."
+  },
+  {
+   "QUERYID": "1298",
+   "QUERY": "Thigh-length graduated compression stockings (GCS) did not reduce deep vein thrombosis in patients admitted to hospital who are immobile because of acute stroke."
+  },
+  {
+   "QUERYID": "1303",
+   "QUERY": "Tirasemtiv has no effect on fast-twitch muscle."
+  },
+  {
+   "QUERYID": "1316",
+   "QUERY": "Transferred UCB T cells acquire a memory-like phenotype in recipients."
+  },
+  {
+   "QUERYID": "1319",
+   "QUERY": "Transplanted human glial cells can differentiate within the host animal."
+  },
+  {
+   "QUERYID": "1320",
+   "QUERY": "Transplanted human glial progenitor cells are incapable of forming a neural network with host animals' neurons."
+  },
+  {
+   "QUERYID": "1332",
+   "QUERY": "Tumor necrosis factor alpha (TNF-\u03b1) and interleukin-1 (IL-1) are pro-inflammatory cytokines that inhibit IL-6 and IL-10."
+  },
+  {
+   "QUERYID": "1335",
+   "QUERY": "UCB T cells maintain high TCR diversity after transplantation."
+  },
+  {
+   "QUERYID": "1336",
+   "QUERY": "UCB T cells reduce TCR diversity after transplantation."
+  },
+  {
+   "QUERYID": "1337",
+   "QUERY": "Ubiquitin ligase UBC13 generates a K63-linked polyubiquitin moiety at PCNA K164."
+  },
+  {
+   "QUERYID": "1339",
+   "QUERY": "Ultrasound guidance significantly raises the number of traumatic procedures when attempting needle insertion."
+  },
+  {
+   "QUERYID": "1344",
+   "QUERY": "Up-regulation of the p53 pathway and related molecular events casues cancer resistance and results in a significantly shortened lifespan marked by senescent cells and accelerated organismal aging."
+  },
+  {
+   "QUERYID": "1352",
+   "QUERY": "Upregulation of mosGCTL-1 is induced upon infection with West Nile virus."
+  },
+  {
+   "QUERYID": "1359",
+   "QUERY": "Varenicline monotherapy is more effective after 12 weeks of treatment compared to combination nicotine replacement therapies with varenicline or bupropion."
+  },
+  {
+   "QUERYID": "1362",
+   "QUERY": "Venules have a larger lumen diameter than arterioles."
+  },
+  {
+   "QUERYID": "1363",
+   "QUERY": "Venules have a thinner or absent smooth layer compared to arterioles."
+  },
+  {
+   "QUERYID": "1368",
+   "QUERY": "Vitamin D deficiency effects the term of delivery."
+  },
+  {
+   "QUERYID": "1370",
+   "QUERY": "Vitamin D deficiency is unrelated to birth weight."
+  },
+  {
+   "QUERYID": "1379",
+   "QUERY": "Women with a higher birth weight are more likely to develop breast cancer later in life."
+  },
+  {
+   "QUERYID": "1382",
+   "QUERY": "aPKCz causes tumour enhancement by affecting glutamine metabolism."
+  },
+  {
+   "QUERYID": "1385",
+   "QUERY": "cSMAC formation enhances weak ligand signalling."
+  },
+  {
+   "QUERYID": "1389",
+   "QUERY": "mTORC2 regulates intracellular cysteine levels through xCT inhibition."
+  },
+  {
+   "QUERYID": "1395",
+   "QUERY": "p16INK4A accumulation is linked to an abnormal wound response caused by the microinvasive step of advanced Oral Potentially Malignant Lesions (OPMLs)."
+  }
+ ]
+}

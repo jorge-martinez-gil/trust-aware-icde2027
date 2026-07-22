@@ -17,21 +17,41 @@ from an untrustworthy duplicate that returns plausible-but-unverifiable content
 
 ## 2. Federated testbed (real data)
 
-We assemble five classic, public-domain IR test collections spanning five
-domains into one federation; each collection is one source. Documents, queries,
-and relevance judgements are real. Provenance and exact GitHub mirror commits are
-recorded in `data/federated/raw/PROVENANCE.md`.
+We assemble six openly licensed IR test collections spanning six domains into one
+federation; each collection is one source. The five classic collections are public
+domain; SciFact's claims are CC BY 4.0 over S2ORC abstracts under ODC-By 1.0. Documents, queries, and relevance
+judgements are real. Provenance, exact GitHub mirror commits, and the SciFact
+release hash are recorded in `data/federated/raw/PROVENANCE.md`.
 
-| Collection | Domain                        | Docs   | Queries | BM25 nDCG@10 |
-|------------|-------------------------------|--------|---------|--------------|
-| CACM       | Computer science              | 3,204  | 52      | 0.48 |
-| MED        | Biomedicine (Medline)         | 1,033  | 30      | 0.69 |
-| NPL        | Electrical engineering        | 11,429 | 93      | 0.39 |
-| CRAN       | Aeronautics (Cranfield)       | 1,400  | 225     | 0.38 |
-| CISI       | Library & information science | 1,460  | 76      | 0.36 |
+| Collection | Domain                        | Docs   | Queries | Rel./q | BM25 nDCG@10 |
+|------------|-------------------------------|--------|---------|--------|--------------|
+| CACM       | Computer science              | 3,204  | 52      | 14.2   | 0.48 |
+| MED        | Biomedicine (Medline)         | 1,033  | 30      | 23.2   | 0.69 |
+| NPL        | Electrical engineering        | 11,429 | 93      | 22.4   | 0.39 |
+| CRAN       | Aeronautics (Cranfield)       | 1,400  | 225     | 7.2    | 0.38 |
+| CISI       | Library & information science | 1,460  | 76      | 41.0   | 0.36 |
+| SCIFACT    | Scientific claim verification | 5,183  | 300     | 1.1    | 0.67 |
 
-Total: 18,526 documents, 476 judged queries. Per-collection BM25 nDCG@10 values
+Total: 23,709 documents, 776 judged queries. Per-collection BM25 nDCG@10 values
 are consistent with the published literature, validating the retrieval harness.
+Our SciFact BM25 scores 0.668, which lands next to the BM25 baseline of ~0.665
+reported by BEIR — close agreement, though not a like-for-like reproduction:
+we index a single concatenated title+abstract field with k1=1.5, b=0.75, while
+BEIR's figure comes from Anserini's multi-field BM25 with k1=0.9, b=0.4.
+
+The first five collections are classics assembled between the 1960s and 1990s.
+SCIFACT (Wadden et al., EMNLP 2020) is deliberately different in kind: its
+queries are natural scientific claims rather than curated topic statements, and
+its judgements are roughly an order of magnitude sparser (~1.1 relevant docs per
+query vs. 7-41). We use BEIR's 300-query test split so our per-collection numbers
+stay comparable to published baselines.
+
+**Caveat on absolute values.** Adding SciFact raises every method's absolute
+nDCG@10 and MAP, including Oracle (0.409 -> 0.509). This is a property of the
+judgement density, not an improvement in routing: with ~1.1 relevant documents
+per claim, a single hit at rank 1 saturates nDCG@10. Comparisons *between*
+methods on the same testbed remain the meaningful quantity; absolute values are
+not comparable to the five-collection version of this table.
 
 Each collection's relevant documents live only in its home collection, so
 resource selection reduces to *routing each query to its home source(s)* — the
@@ -92,7 +112,7 @@ queries < *t* — there is no train/test leakage. We report routing accuracy
 (R@1), reciprocal rank (MRR), and end-to-end merged-retrieval quality (nDCG@10,
 MAP) at cost budgets of 1–3 sources. All numbers are averaged over seeds
 {7, 11, 13}. Confirmatory inference first averages seed replicates within each
-query, then uses the 476 queries as independent clusters. We report two-sided
+query, then uses the 776 queries as independent clusters. We report two-sided
 paired Wilcoxon signed-rank tests, 10,000-resample query-bootstrap confidence
 intervals, matched-pairs rank-biserial effects, and Holm-Bonferroni correction
 across the complete family of four comparisons (two metrics x two baselines).
@@ -101,7 +121,7 @@ across the complete family of four comparisons (two metrics x two baselines).
 
 **Clean federation (0 twins).** Trust-Aware is competitive with the strongest
 baseline but does not beat it — the expected "no free lunch" cost of the trust
-machinery. CORI R@1 = 0.874, Trust-Aware R@1 = 0.832 ± 0.022. This is reported
+machinery. CORI R@1 = 0.893, Trust-Aware R@1 = 0.822 ± 0.014. This is reported
 transparently.
 
 **Untrusted federation.** As twins are added, content-based selection collapses
@@ -109,15 +129,15 @@ while Trust-Aware stays robust:
 
 | Method      | R@1 (0 twins) | R@1 (6 twins) | nDCG@10 (6 twins) |
 |-------------|---------------|---------------|-------------------|
-| ReDDE       | 0.696         | 0.335         | 0.135 |
-| CORI        | 0.874         | 0.424         | 0.173 |
-| **Trust-Aware** | **0.832** | **0.777**     | **0.313** |
-| Oracle      | 1.000         | 1.000         | 0.409 |
+| ReDDE       | 0.785         | 0.405         | 0.204 |
+| CORI        | 0.893         | 0.451         | 0.228 |
+| **Trust-Aware** | **0.822** | **0.807**     | **0.421** |
+| Oracle      | 1.000         | 1.000         | 0.509 |
 
-At 6 twins, Trust-Aware improves nDCG@10 over CORI by +0.141
-(95% CI [0.120, 0.161], p_Holm = 1.5e-31, paired rank-biserial = 0.726) and
-over ReDDE by +0.178 (95% CI [0.155, 0.202], p_Holm = 6.5e-39,
-paired rank-biserial = 0.793). Both are large paired effects. The full
+At 6 twins, Trust-Aware improves nDCG@10 over CORI by +0.193
+(95% CI [0.173, 0.214], p_Holm = 4.9e-59, paired rank-biserial = 0.809) and
+over ReDDE by +0.217 (95% CI [0.196, 0.238], p_Holm = 2.6e-66,
+paired rank-biserial = 0.841). Both are large paired effects. The full
 robustness curves, online learning curve, and learned per-source trust are in
 `figures/federated/`; exact inferential outputs are in
 `results/federated/statistical_analysis.json`.
@@ -138,10 +158,12 @@ to `results/federated/tables/` and `paper/tables/`.
 
 ## 8. Honest limitations
 
-- **Collections are small and classic.** They are real and standard but modest
-  in scale; results should be confirmed on a large modern federation (e.g.,
-  BEIR shards) before strong external-validity claims. BEIR was not reachable
-  from the build environment; the design is dataset-agnostic and ports directly.
+- **Collections are modest in scale.** They are real and standard, and the
+  federation now spans both classic collections and one modern BEIR collection
+  (SciFact), but the whole testbed is still only 23,709 documents. Results
+  should be confirmed on a large modern federation (e.g., the bigger BEIR
+  shards such as FiQA, TREC-COVID, or MS MARCO) before strong external-validity
+  claims. The design is dataset-agnostic and ports directly.
 - **Single-home routing.** Each query's relevant documents reside in one
   collection. Multi-home queries (relevant evidence spread across sources) are a
   natural and important extension.

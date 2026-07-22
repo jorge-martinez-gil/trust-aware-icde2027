@@ -1,6 +1,6 @@
-"""Unified federated IR testbed: parse heterogeneous classic collections.
+"""Unified federated IR testbed: parse heterogeneous IR collections.
 
-Five public-domain test collections spanning five domains are normalized into a
+Six public-domain test collections spanning six domains are normalized into a
 common ``Collection`` structure so the federation can be treated as a set of
 queryable sources:
 
@@ -12,7 +12,15 @@ MED         Biomedicine (Medline)          1033     30     JSON
 NPL         Electrical engineering        11429     93     JSON
 CRAN        Aeronautics (Cranfield)        1400    225     TREC/XML
 CISI        Library & information science  1460    112     SMART
+SCIFACT     Scientific claim verification   5183    300     JSON (BEIR)
 ==========  ============================  ======  =======  ===========
+
+The first five are classic collections assembled in the 1960s-1990s; SCIFACT
+(Wadden et al., 2020) is a modern BEIR collection whose queries are natural
+scientific claims rather than curated topic statements, and whose judgments are
+far sparser (~1.1 relevant docs per query vs. ~14-41 for the classics). That
+spread in query style, era, and judgment density is exactly the heterogeneity
+a trust-aware selector has to cope with.
 
 Raw provenance is recorded in ``data/federated/raw/PROVENANCE.md``.
 """
@@ -40,6 +48,7 @@ COLLECTION_DOMAINS = {
     "NPL": "Electrical engineering",
     "CRAN": "Aeronautics",
     "CISI": "Library & information science",
+    "SCIFACT": "Scientific claim verification",
 }
 
 
@@ -116,7 +125,7 @@ def _norm(text: str) -> str:
 
 
 def _parse_jsonl_collection(name: str, folder: str, doc_file: str) -> Collection:
-    """CACM / MED / NPL: JSON-lines docs + queries.json + TREC qrels."""
+    """CACM / MED / NPL / SCIFACT: JSON-lines docs + queries.json + TREC qrels."""
     docs: Dict[str, str] = {}
     with open(os.path.join(folder, doc_file), encoding="utf-8", errors="ignore") as fh:
         for line in fh:
@@ -244,6 +253,11 @@ def build_testbed(raw_dir: str = RAW_DIR) -> Testbed:
     tb.collections["CRAN"] = _parse_cran(os.path.join(raw_dir, "cran"))
     tb.collections["CISI"] = _parse_smart(
         "CISI", "CISI.ALL", "CISI.QRY", "CISI.REL", os.path.join(raw_dir, "cisi")
+    )
+    # SciFact ships in BEIR layout; ``script/convert_scifact.py`` normalizes it
+    # into the same JSON-lines shape as CACM/MED/NPL.
+    tb.collections["SCIFACT"] = _parse_jsonl_collection(
+        "SCIFACT", os.path.join(raw_dir, "scifact"), "scifact.json"
     )
     # Drop qrels that point to non-existent docs (keeps metrics honest).
     for c in tb.collections.values():

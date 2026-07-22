@@ -1,0 +1,124 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{lewis2020rag}
+P.~Lewis, E.~Perez, A.~Piktus, F.~Petroni, V.~Karpukhin, N.~Goyal,
+  H.~K{\"u}ttler, M.~Lewis, W.-t. Yih, T.~Rockt{\"a}schel, S.~Riedel, D.~Kiela,
+  Retrieval-augmented generation for knowledge-intensive {NLP} tasks, in:
+  Advances in Neural Information Processing Systems, Vol.~33, 2020, pp.
+  9459--9474.
+
+\bibitem{gao2023rag}
+Y.~Gao, Y.~Xiong, X.~Gao, et~al., Retrieval-augmented generation for large
+  language models: A survey, arXiv preprint arXiv:2312.10997 (2023).
+
+\bibitem{ooi2024neurdb}
+B.~C. Ooi, S.~Cai, G.~Chen, Y.~Shen, K.-L. Tan, Y.~Wu, X.~Xiao, N.~Xing,
+  C.~Yue, L.~Zeng, M.~Zhang, Z.~Zhao, {NeurDB}: An {AI}-powered autonomous data
+  system, arXiv preprint arXiv:2405.03924 (2024).
+
+\bibitem{zhou2025llmdata}
+X.~Zhou, J.~He, W.~Zhou, H.~Chen, Z.~Tang, H.~Zhao, X.~Tong, G.~Li, Y.~Chen,
+  J.~Zhou, Z.~Sun, B.~Hui, S.~Wang, C.~He, Z.~Liu, J.~Zhou, F.~Wu, A survey of
+  {LLM} $\times$ {DATA}, arXiv preprint arXiv:2505.18458 (2025).
+
+\bibitem{callan1995cori}
+J.~P. Callan, Z.~Lu, W.~B. Croft, Searching distributed collections with
+  inference networks, in: Proc. ACM SIGIR, 1995, pp. 21--28.
+
+\bibitem{si2003redde}
+L.~Si, J.~Callan, Relevant document distribution estimation method for resource
+  selection, in: Proc. ACM SIGIR, 2003, pp. 298--305.
+
+\bibitem{callan2000distributed}
+J.~Callan, Distributed information retrieval, in: Advances in Information
+  Retrieval, Springer, 2000, pp. 127--150.
+
+\bibitem{shokouhi2011federated}
+M.~Shokouhi, L.~Si, Federated search, Foundations and Trends in Information
+  Retrieval 5~(1) (2011) 1--102.
+
+\bibitem{anthropic2024mcp}
+{Anthropic}, Introducing the {Model Context Protocol},
+  \url{https://www.anthropic.com/news/model-context-protocol}, open standard
+  for connecting AI assistants to external tools and data sources. Accessed:
+  2026-07-10 (2024).
+
+\bibitem{zhong2023corpus}
+Z.~Zhong, Z.~Huang, A.~Wettig, D.~Chen, Poisoning retrieval corpora by
+  injecting adversarial passages, in: Proceedings of the 2023 Conference on
+  Empirical Methods in Natural Language Processing (EMNLP), 2023, pp.
+  13764--13775.
+
+\bibitem{zou2025poisonedrag}
+W.~Zou, R.~Geng, B.~Wang, J.~Jia, {PoisonedRAG}: Knowledge corruption attacks
+  to retrieval-augmented generation of large language models, in: Proceedings
+  of the 34th USENIX Security Symposium, 2025, pp. 3827--3844.
+
+\bibitem{singh2025agentic}
+A.~Singh, A.~Ehtesham, S.~Kumar, T.~T. Khoei, Agentic retrieval-augmented
+  generation: A survey on agentic {RAG}, arXiv preprint arXiv:2501.09136
+  (2025).
+
+\bibitem{zhang2025ragrouter}
+J.~Zhang, X.~Liu, Y.~Hu, C.~Niu, F.~Wu, G.~Chen, Query routing for
+  retrieval-augmented language models, arXiv preprint arXiv:2505.23052 (2025).
+
+\bibitem{buneman2001why}
+P.~Buneman, S.~Khanna, W.-C. Tan, Why and where: A characterization of data
+  provenance, in: Proceedings of the 8th International Conference on Database
+  Theory, 2001, pp. 316--330.
+
+\bibitem{nogueira2019passage}
+R.~Nogueira, K.~Cho, Passage re-ranking with {BERT}, arXiv preprint
+  arXiv:1901.04085 (2019).
+
+\bibitem{wilson1927interval}
+E.~B. Wilson, Probable inference, the law of succession, and statistical
+  inference, Journal of the American Statistical Association 22~(158) (1927)
+  209--212.
+
+\bibitem{brown2001interval}
+L.~D. Brown, T.~T. Cai, A.~DasGupta, Interval estimation for a binomial
+  proportion, Statistical Science 16~(2) (2001) 101--133.
+
+\bibitem{auer2002finite}
+P.~Auer, N.~Cesa-Bianchi, P.~Fischer, Finite-time analysis of the multiarmed
+  bandit problem, Machine Learning 47 (2002) 235--256.
+
+\bibitem{demsar2006statistical}
+J.~Dem{\v{s}}ar, Statistical comparisons of classifiers over multiple data
+  sets, Journal of Machine Learning Research 7 (2006) 1--30.
+
+\bibitem{wilcoxon1945individual}
+F.~Wilcoxon, Individual comparisons by ranking methods, Biometrics Bulletin
+  1~(6) (1945) 80--83.
+
+\bibitem{holm1979simple}
+S.~Holm, A simple sequentially rejective multiple test procedure, Scandinavian
+  Journal of Statistics 6~(2) (1979) 65--70.
+
+\bibitem{cliff1993delta}
+N.~Cliff, Dominance statistics: Ordinal analyses to answer ordinal questions,
+  Psychological Bulletin 114~(3) (1993) 494--509.
+
+\bibitem{robertson2009bm25}
+S.~Robertson, H.~Zaragoza, The probabilistic relevance framework: {BM25} and
+  beyond, Foundations and Trends in Information Retrieval 3~(4) (2009)
+  333--389.
+
+\bibitem{wadden2020fact}
+D.~Wadden, S.~Lin, K.~Lo, L.~L. Wang, M.~van Zuylen, A.~Cohan, H.~Hajishirzi,
+  Fact or fiction: Verifying scientific claims, in: Proc. EMNLP, 2020, pp.
+  7534--7550.
+
+\bibitem{thakur2021beir}
+N.~Thakur, N.~Reimers, A.~R{\"u}ckl{\'e}, A.~Srivastava, I.~Gurevych, {BEIR}: A
+  heterogeneous benchmark for zero-shot evaluation of information retrieval
+  models, in: NeurIPS Datasets and Benchmarks, 2021.
+
+\end{thebibliography}

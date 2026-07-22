@@ -19,7 +19,7 @@ abstract: >-
   source selection, calibrated beta-binomial trust scoring, explainable
   query plans, trust certificates, redundant source portfolios,
   multi-stage pipeline planning, and a real-data federated retrieval
-  study over five public-domain IR collections.
+  study over six public-domain IR collections.
 keywords:
   - query-optimization
   - trust
