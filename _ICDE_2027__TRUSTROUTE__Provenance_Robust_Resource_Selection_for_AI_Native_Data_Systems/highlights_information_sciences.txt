@@ -1,7 +1,0 @@
-Highlights
-
-* Formalizes provenance-robust routing for AI-native data systems
-* Proves a content-only bound for content-identical impostor sources
-* TrustRoute preserves 96% routing accuracy under eight evil twins
-* Improves nDCG@10 over CORI by 0.193 at six untrusted twins
-* Posterior trust recovers graded reliability and tracks source drift
