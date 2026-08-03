@@ -1,6 +1,6 @@
 # Trust-Aware Query Optimization for AI-Native Data Systems
 
-This repository is a reference implementation for the paper idea
+This repository is a reference implementation for the paper
 **Trust-Aware Query Optimization for AI-Native Data Systems**. It models a new
 optimizer layer for systems where a "data source" may be a table, vector index,
 retrieval service, model-backed tool, memory shard, or grounded generation
