@@ -1,64 +1,110 @@
 # Trust-Aware Query Optimization for AI-Native Data Systems
 
-This repository is a reference implementation for the paper
-**Trust-Aware Query Optimization for AI-Native Data Systems**. It models a new
-optimizer layer for systems where a "data source" may be a table, vector index,
-retrieval service, model-backed tool, memory shard, or grounded generation
-operator.
+A research-oriented Python implementation for trust-aware source selection and planning in AI-native data systems. This repository formalizes the idea that trust should be treated as a first-class optimization objective, alongside latency, cost, freshness, privacy risk, and coverage.
 
-The core claim is simple: AI-native query planners should optimize for trust as
-a first-class objective, not as an application-level afterthought.
+The project provides a reproducible reference implementation for the paper "Trust-Aware Query Optimization for AI-Native Data Systems", including source models, optimizer logic, explainable plan generation, trust certificates, portfolio planning, pipeline planning, and empirical evaluation on synthetic and real datasets.
 
-## What Is Included
+## Overview
 
-- Constraint-aware source selection with capability, latency, freshness, trust,
-  cost, privacy, and hallucination-risk gates.
-- Calibrated trust scoring from beta-binomial evidence streams.
-- Explainable `QueryPlan` output with rejection reasons, score breakdowns, and
-  Pareto annotations.
-- Named policy profiles for high-assurance, balanced, latency-critical,
-  cost-efficient, and trust-only studies.
-- Trust certificates that turn optimizer decisions into portable audit records.
-- Budgeted source-portfolio planning for redundant high-stakes retrieval.
-- Multi-stage AI query pipeline planning for retrieve-generate-verify workflows.
-- Online feedback ledgers for updating trust evidence from observed outcomes.
-- Deterministic synthetic benchmarks with trust-aware, cost-first, fast-first,
-  and trust-only ablations.
-- Real-data study on the UCI Wisconsin Diagnostic Breast Cancer dataset with
-  cross-validation, Wilson intervals, and bootstrap confidence intervals.
-- A compact source catalog and end-to-end research demo.
-- Unit tests covering legacy behavior, calibration, explainability, catalogs,
-  certificates, portfolios, pipelines, feedback, and benchmark determinism.
+Modern AI-native data systems integrate heterogeneous sources such as:
+
+- relational tables
+- vector indexes
+- retrieval services
+- model-backed tools
+- memory shards
+- grounded generation operators
+
+In these settings, choosing a source based only on raw relevance or latency is insufficient. A source may be fast and cheap yet untrusted, stale, or overly risky. This project addresses that gap by making trust a measurable, auditable, and optimizable property.
+
+The optimizer supports:
+
+- constraint-aware source selection
+- calibrated trust scoring from evidence streams
+- explainable decision records
+- named policy profiles for different operating regimes
+- redundant portfolio planning for high-stakes workloads
+- multi-stage query pipeline planning
+- online trust evidence updates from observed outcomes
+- reproducible benchmark and real-data studies
+
+## Key Features
+
+- Trust-aware optimization with explicit constraint checks and weighted utility
+- Evidence-based scoring using beta-binomial confidence estimates
+- Explainable plans with rejection reasons, score components, and Pareto annotations
+- Policy profiles for high-assurance, balanced, latency-critical, cost-efficient, and trust-only settings
+- Trust certificates for portable audit and reproducibility artifacts
+- Redundant source portfolios for robust high-stakes retrieval and verification
+- End-to-end AI query workflow planning across retrieval, grounding, generation, and verification stages
+- Real-data evaluation on the Wisconsin Diagnostic Breast Cancer dataset
+- Deterministic synthetic benchmarks and benchmarking ablations
+- Dependency-free core implementation for easy auditing and reproducibility
+
+## Repository Structure
+
+```text
+.
+├── data/                     # benchmark and dataset files
+├── docs/                     # project documentation and architecture notes
+├── examples/                 # end-to-end usage examples
+├── figures/                  # generated SVG/PDF/PNG figure outputs
+├── results/                  # experiment outputs and summaries
+├── script/                   # utility scripts and task runners
+├── tests/                    # unit and validation tests
+├── trust_aware/              # core package
+│   ├── adaptive.py           # adaptive trust management logic
+│   ├── benchmark.py          # synthetic benchmark generation
+│   ├── catalog.py            # in-memory source catalog
+│   ├── certificates.py      # plan and portfolio certificates
+│   ├── evaluation.py        # benchmark evaluation/reporting
+│   ├── feedback.py           # online feedback and ledger updates
+│   ├── models.py             # data models for sources, requests, and plans
+│   ├── optimizer.py          # trust-aware optimizer logic
+│   ├── pipeline.py           # multi-stage pipeline planning
+│   ├── policies.py           # named optimization policies
+│   ├── portfolio.py          # portfolio planner
+│   ├── realdata.py           # real-data evaluation logic
+│   ├── scoring.py            # scoring strategies
+│   ├── stats.py              # confidence interval utilities
+│   ├── trust_graph.py        # trust graph data structures
+│   ├── visualization.py      # publication-quality figure generation
+│   └── __init__.py           # public API exports
+├── CITATION.cff              # citation metadata
+├── CONTRIBUTING.md           # contribution guidelines
+├── LICENSE                   # MIT license
+├── pyproject.toml            # package configuration
+├── README.md                 # project overview and usage guide
+└── .gitignore
+```
 
 ## Installation
 
-The core optimizer has no third-party runtime dependencies. Clone the repository
-and install it in editable mode:
+The core package is intended to be lightweight and dependency-free. Python 3.10 or newer is required.
+
+Clone the repository and install it in editable mode:
 
 ```bash
-git clone https://github.com/jorge-martinez-gil/trust-aware.git
-cd trust-aware
+git clone https://github.com/jorge-martinez-gil/trust-aware-icde2027.git
+cd trust-aware-icde2027
 pip install -e .
 ```
 
-The federated retrieval study additionally needs numpy, scipy, and matplotlib.
-Install them with the `federated` extra:
+If you want to run the federated retrieval study and associated plotting/statistical utilities, install the optional dependencies:
 
 ```bash
 pip install -e .[federated]
 ```
 
-Python 3.10 or newer is required.
-
 ## Quick Start
 
-Run the test suite:
+Run the full test suite:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-Run the benchmark ablation:
+Run the benchmark ablation study:
 
 ```bash
 python -m trust_aware --seed 7
@@ -76,13 +122,13 @@ Run the real-data WDBC study:
 python -m trust_aware --real-study
 ```
 
-Generate publication-quality SVG figures:
+Generate publication-quality figures:
 
 ```bash
 python -m trust_aware --plots figures --seed 7
 ```
 
-Run the end-to-end planning demo:
+Run the end-to-end research demo:
 
 ```bash
 python examples/research_demo.py
@@ -91,7 +137,12 @@ python examples/research_demo.py
 ## Minimal Example
 
 ```python
-from trust_aware import Capability, DataSource, QueryRequest, TrustAwareQueryOptimizer
+from trust_aware import (
+    Capability,
+    DataSource,
+    QueryRequest,
+    TrustAwareQueryOptimizer,
+)
 
 sources = [
     DataSource(
@@ -131,52 +182,29 @@ print(plan.primary_source.name)
 print(plan.explain())
 ```
 
-## Research Shape
+## Research Contributions
 
-The implementation is intentionally dependency-free and small enough to audit,
-but it is not a toy ranking script. It separates:
+This repository is more than a conventional optimizer prototype. It implements a complete experimental framework for studying trust-aware planning in AI-native ecosystems.
 
-- `trust_aware.models`: sources, requests, evidence, score breakdowns, and plans.
-- `trust_aware.optimizer`: hard constraints, trust lower bounds, weighted
-  expected utility, uncertainty penalties, Pareto marking, and explanations.
-- `trust_aware.policies`: named profiles that make experiments repeatable.
-- `trust_aware.certificates`: decision certificates for audit and reproducibility.
-- `trust_aware.portfolio`: redundant source portfolios with trust, latency, and
-  cost budgets.
-- `trust_aware.pipeline`: multi-stage AI query planning.
-- `trust_aware.feedback`: online trust-evidence updates.
-- `trust_aware.evaluation`: multi-seed policy studies and markdown reports.
-- `trust_aware.realdata`: WDBC ingestion, cross-validation, and real-data
-  policy evaluation.
-- `trust_aware.stats`: dependency-free confidence intervals and bootstrap
-  summaries.
-- `trust_aware.visualization`: high-quality dependency-free SVG figures.
-- `trust_aware.catalog`: an in-memory source catalog for experiments.
-- `trust_aware.benchmark`: deterministic workload generation and ablation.
-- `docs/architecture.md`: the design map for paper readers and reviewers.
+The core components include:
 
-## Scoring
-
-For every admissible source, the optimizer computes:
-
-```text
-score =
-  trust_weight     * calibrated_trust_lower_bound
-+ latency_weight   * latency_component
-+ freshness_weight * freshness_score
-+ cost_weight      * (1 / (1 + cost_per_query))
-+ coverage_weight  * coverage
-+ risk_weight      * (1 - max(privacy_risk, hallucination_risk))
-- uncertainty_weight * (1 - trust_confidence)
-```
-
-Hard constraints are enforced before scoring. This keeps policy boundaries
-auditable: a cheap source that violates privacy risk or trust floors does not win
-by compensating with cost.
+- `trust_aware.models`: data structures for sources, evidence, requests, and explanations
+- `trust_aware.optimizer`: hard constraints, weighted utility, uncertainty penalties, and Pareto-based decisions
+- `trust_aware.policies`: named policy profiles for different operating conditions
+- `trust_aware.certificates`: audit-ready certificates for optimizer decisions
+- `trust_aware.portfolio`: budgeted redundant source portfolios
+- `trust_aware.pipeline`: workflow-aware planning for multi-stage AI queries
+- `trust_aware.feedback`: online evidence updates from observed outcomes
+- `trust_aware.evaluation`: repeatable policy studies and markdown reports
+- `trust_aware.realdata`: real-data evaluation on the WDBC dataset
+- `trust_aware.stats`: statistical utilities for confidence intervals and uncertainty quantification
+- `trust_aware.visualization`: figure generation for publications and artifacts
+- `trust_aware.catalog`: in-memory source catalogs for experiments
+- `trust_aware.benchmark`: deterministic workload generation and ablations
 
 ## Trust Certificates
 
-Every plan can be certified:
+Every optimizer decision can be certified for auditability and reproducibility.
 
 ```python
 from trust_aware import certify_plan
@@ -186,22 +214,11 @@ print(certificate.certificate_id)
 print(certificate.to_markdown())
 ```
 
-The certificate contains the query, objective, constraints, ranked candidates,
-evidence summaries, Pareto status, and rejection reasons. It is stable for the
-same decision, which makes it useful for paper artifacts, regression tests, and
-deployment audit logs.
-
-## Pipeline Planning
-
-AI-native queries are often workflows rather than one operator. The repository
-therefore includes a `TrustAwarePipelinePlanner` that applies a shared policy to
-stages such as retrieval, grounding, generation, verification, and policy audit.
-It reports end-to-end latency, cost, completeness, and the pipeline trust floor.
+A certificate documents the query, objective, constraints, ranked candidates, evidence summaries, Pareto status, and rejection reasons. This makes the system useful not only for optimization, but also for deployment auditing, paper artifact generation, and regression testing.
 
 ## Portfolio Planning
 
-For high-stakes queries, the artifact can now select a small redundant portfolio
-instead of a single winning source:
+For high-stakes workflows, the system can plan a small redundant source portfolio instead of selecting a single source:
 
 ```python
 from trust_aware import PortfolioBudget, TrustAwarePortfolioPlanner, certify_portfolio
@@ -222,101 +239,59 @@ print(portfolio_plan.explain())
 print(certify_portfolio(portfolio_plan, request).to_markdown())
 ```
 
-Portfolio trust uses a redundancy-aware success model with a configurable
-correlation penalty, so independent evidence can raise confidence without
-pretending that sources are perfectly independent. This gives the paper artifact
-a concrete mechanism for triangulation and budgeted verification.
+This redundancy-aware planner accounts for uncertainty and source correlation, enabling more robust decision-making under adversarial or incomplete information.
 
-## Real-Data Study
+## Real Data and Empirical Evaluation
 
-The repository now ships the UCI Wisconsin Diagnostic Breast Cancer dataset in
-`data/`. The real-data path evaluates feature-family diagnostic sources with
-deterministic stratified cross-validation, converts observed accuracy,
-sensitivity, and specificity into trust evidence, and then asks the optimizer to
-choose under the named policy profiles.
+The repository includes the UCI Wisconsin Diagnostic Breast Cancer dataset in `data/`. The evaluation pipeline uses feature-family diagnostic sources, stratified cross-validation, and calibrated trust evidence to study how the optimizer behaves under realistic conditions.
 
-The report includes:
+Key outputs include:
 
-- Wilson score intervals for binomial reliability metrics.
-- Bootstrap confidence intervals over fold-level balanced accuracy.
-- Policy-selected sources with trust lower bound, latency, cost, sensitivity,
-  specificity, and false-negative rate.
+- Wilson score intervals for reliability estimates
+- bootstrap confidence intervals over performance metrics
+- source-level policy selection under trust and risk constraints
+- reproducible benchmark and study reports
 
-## Paper Figures
+The project also contains a federated IR study focused on trust-aware routing in heterogeneous retrieval settings, with comparisons to established baselines such as CORI, ReDDE, Random, Search-All, and Oracle.
 
-The plot generator emits vector SVG figures suitable for papers, talks, and
-artifact documentation:
+## Paper Figures and Artifacts
 
-- `figure_01_policy_atlas.svg`: policy tradeoff atlas.
-- `figure_02_trust_latency_frontier.svg`: Pareto skyline over source choices.
-- `figure_03_decision_certificate_waterfall.svg`: score contribution waterfall.
-- `figure_04_ai_query_pipeline.svg`: multi-stage AI query workflow.
-- `figure_05_calibration_lens.svg`: posterior trust and uncertainty lens.
-- `figure_06_real_dataset_statistics.svg`: real-data confidence interval study.
+The project generates publication-ready figures, including:
 
-## Paper Artifact Checklist
+- policy tradeoff atlas
+- trust-latency frontier
+- decision certificate waterfall
+- AI query pipeline diagram
+- calibration lens
+- real-data statistical visualizations
 
-- Reproducible command-line benchmark.
-- Deterministic seeds for synthetic catalogs and workloads.
-- Public, typed Python API.
-- Explainable plan objects for qualitative inspection.
-- Trust certificates for decision audit.
-- Redundant portfolio certificates for high-stakes source triangulation.
-- Real-data statistical validation on WDBC with confidence intervals.
-- Multi-policy evaluation reports.
-- Multi-stage planning for AI query workflows.
-- Online trust updates from feedback events.
-- Publication-quality SVG figures generated from the artifact itself.
-- Focused tests that validate optimizer behavior.
-- No external runtime dependencies.
-
-## Federated Trust-Aware Retrieval Study (Real Data)
-
-The `trust_aware.federated` subpackage contains the paper's empirical core: a
-real-data study that frames trust-aware source selection as resource selection /
-query routing over a federation of six heterogeneous, openly licensed IR
-collections (CACM, MED, NPL, CRANFIELD, CISI, and the modern BEIR SciFact —
-23,709 documents, 776 judged queries; provenance in
-`data/federated/raw/PROVENANCE.md`).
-
-It compares the trust-aware router against established federated-IR baselines
-(CORI, ReDDE, Random, Search-All, Oracle) with query-clustered paired Wilcoxon
-tests, family-wise Holm-Bonferroni correction, query bootstrap CIs, paired
-rank-biserial effect sizes, and three seeded replicates. The headline finding:
-when untrusted duplicate ("evil-twin")
-sources are injected, content-based selection collapses while trust-aware routing
-stays robust. See `docs/federated_study.md` for the full design, results, and
-honest limitations.
-
-```bash
-pip install -e .[federated]
-python -m trust_aware --federated-study     # full study + figures + LaTeX tables
-python -m unittest tests.test_federated -v  # validation incl. the headline claim
-```
-
-Outputs: `results/federated/` (JSON + `statistical_analysis.json` +
-`RESULTS.md` + `tables/*.tex`) and
-`figures/federated/` (publication PDF + PNG).
+These figures are generated directly from the artifact, supporting reproducible scientific reporting.
 
 ## Citation
 
-If you use this software or its results, please cite the accompanying paper.
-Machine-readable metadata is provided in [`CITATION.cff`](CITATION.cff).
+If you use this software or its results, please cite the accompanying work.
 
 ```bibtex
 @inproceedings{martinezgil2026trustaware,
   title     = {Trust-Aware Query Optimization for AI-Native Data Systems},
   author    = {Martinez-Gil, Jorge},
   year      = {2026},
-  note      = {Update with the final venue, pages, and DOI upon publication}
+  note      = {Update with final venue, pages, and DOI upon publication}
 }
 ```
 
+Machine-readable metadata is also available in [`CITATION.cff`](CITATION.cff).
+
 ## License
 
-Released under the [MIT License](LICENSE), Copyright (c) 2026 Jorge Martinez-Gil.
+This project is released under the [MIT License](LICENSE).
 
-The bundled datasets are redistributed under their own terms; see
-[`data/README.md`](data/README.md) and
-[`data/federated/raw/PROVENANCE.md`](data/federated/raw/PROVENANCE.md) for
-provenance and licensing of the WDBC and federated IR collections.
+The bundled datasets are redistributed under their own terms; please see [`data/README.md`](data/README.md) and [`data/federated/raw/PROVENANCE.md`](data/federated/raw/PROVENANCE.md) for provenance and licensing details.
+
+## Contributing
+
+Contributions are welcome. For contribution guidelines, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## Acknowledgments
+
+This work is designed for research, reproducible experimentation, and auditability in AI-native data systems. It is intended to support both academic evaluation and practical deployment-oriented trust policies.
